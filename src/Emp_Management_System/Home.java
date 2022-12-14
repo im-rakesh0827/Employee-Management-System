@@ -62,27 +62,19 @@ public class Home extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if(e.getSource()==addEmp){
-            System.out.println("New Employee Can Be Added From Here : ");
+            setVisible(false);
             new Registration();
-//            setVisible(false);
-//            System.exit(0);
-
         }if(e.getSource()==viewEmp){
-            System.out.println("List of employees : ");
-//            setVisible(false);
+            setVisible(false);
             System.exit(0);
-
         }if(e.getSource()==updateEmp){
-            System.out.println("Update Employee : ");
+            setVisible(false);
             System.exit(0);
-
         }if(e.getSource()==deleteEmp){
-            System.out.println("Delete Employee : ");
-            System.exit(0);
+            setVisible(false);
         }
 
     }
-
     public static void main(String[] args) {
         new Home();
     }

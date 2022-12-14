@@ -6,175 +6,223 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
+
 
 public class Registration extends JFrame implements ActionListener {
-    JLabel nameLabel, fatherNameLabel, emailLabel, dobLabel, phoneLabel, employeeLabel, designationLabel, salaryLabel, addressLabel, passwordLabel, confirmPasswordLabel;
-    JTextField tfName, tfFatherName, tfEmail, tfPhone, tfEmployeeId,tfDesignation, tfSalary, tfAddress, tfPassword, tfConfirmPassword;
-    JButton registerButton, cancelButton;
-    JDateChooser dateChooser;
+    JLabel labelName, labelFatherName, labelEmail, labelDOB, labelEducation, labelPhone, labelAadhar, labelEmployee, labelEmployeeID, labelDesignation, labelSalary, labelAddress, labelPassword, labelConfirmPassword;
+    JTextField tfName, tfFatherName, tfEmail, tfPhone, tfAadhar, tfDesignation, tfSalary, tfAddress, tfPassword, tfConfirmPassword;
+    JButton buttonSubmit, buttonBack, buttonCancel;
+    JDateChooser chooserDate;
+    JComboBox boxEducation;
 
-
+    Random random = new Random();
+    int empNumber = random.nextInt(999999);
 
     Registration(){
-//        getContentPane().setBackground(Color.white);
-        getContentPane().setBackground(Color.lightGray);
-        setLayout(null);
+//        getContentPane().setBackground(Color.LIGHT_GRAY);
+//        getContentPane().setBackground(Color.getHSBColor(120,260,150));
 
+        setLayout(null);
         int horizontalShift = 215;
         int verticalShift = 60;
         int buttonShiftVertical = 440;
+        int textFieldArea = 550;
 
 //        Heading :
-
-        JTextField heading  = new JTextField("Registration Form");
-
+        JLabel heading  = new JLabel("REGISTRATION FORM");
+        heading.setBounds(175, 10, 500, 30);
+        heading.setFont(new Font("serif",Font.BOLD, 40));
+        heading.setBackground(Color.CYAN);
+        add(heading);
 
 //        Name :
-        nameLabel = new JLabel("Name : ");
-        nameLabel.setBounds(40, verticalShift, 100, 30);
-        add(nameLabel);
+        labelName = new JLabel("Name : ");
+        labelName.setBounds(40, verticalShift, 100, 30);
+        add(labelName);
         tfName = new JTextField();
-        tfName.setBounds(horizontalShift, verticalShift, 350, 30);
+        tfName.setBounds(horizontalShift, verticalShift, textFieldArea, 30);
         add(tfName);
-        applyFontStyle(nameLabel, tfName);
+        applyFontStyle(labelName, tfName);
 
 
 
 //        Father's Name :
         verticalShift+=40;
-        fatherNameLabel = new JLabel("Father's Name : ");
-        fatherNameLabel.setBounds(40, verticalShift, 130, 30);
-        fatherNameLabel.setFont(new Font("serif", Font.BOLD, 18));
-        add(fatherNameLabel);
+        labelFatherName = new JLabel("Father's Name : ");
+        labelFatherName.setBounds(40, verticalShift, 130, 30);
+        labelFatherName.setFont(new Font("serif", Font.BOLD, 18));
+        add(labelFatherName);
         tfFatherName = new JTextField();
-        tfFatherName.setBounds(horizontalShift, verticalShift, 350, 30);
+        tfFatherName.setBounds(horizontalShift, verticalShift, textFieldArea, 30);
         add(tfFatherName);
-        applyFontStyle(fatherNameLabel, tfFatherName);
+        applyFontStyle(labelFatherName, tfFatherName);
 
 
 
 //        Email :
         verticalShift+=40;
-        emailLabel = new JLabel("Email : ");
-        emailLabel.setBounds(40, verticalShift, 100, 30);
-        add(emailLabel);
+        labelEmail = new JLabel("Email : ");
+        labelEmail.setBounds(40, verticalShift, 100, 30);
+        add(labelEmail);
         tfEmail = new JTextField();
-        tfEmail.setBounds(horizontalShift, verticalShift, 350, 30);
+        tfEmail.setBounds(horizontalShift, verticalShift, textFieldArea, 30);
         add(tfEmail);
-        applyFontStyle(emailLabel, tfEmail);
+        applyFontStyle(labelEmail, tfEmail);
 
 
 //        Date Of Birth
         verticalShift+=40;
-        dobLabel = new JLabel("DOB : ");
-        dobLabel.setBounds(40, verticalShift, 100, 30);
-        add(dobLabel);
-        dateChooser = new JDateChooser();
-        dateChooser.setBounds(horizontalShift, verticalShift, 350, 25);
-        add(dateChooser);
-        dobLabel.setFont(new Font("serif", Font.BOLD, 18));
-        dateChooser.setFont(new Font("serif", Font.PLAIN, 20));
+        labelDOB = new JLabel("DOB : ");
+        labelDOB.setBounds(40, verticalShift, 100, 30);
+        labelDOB.setFont(new Font("serif", Font.BOLD, 18));
+        add(labelDOB);
 
+        chooserDate = new JDateChooser();
+        chooserDate.setBounds(horizontalShift, verticalShift, textFieldArea, 25);
+        add(chooserDate);
+        chooserDate.setFont(new Font("serif", Font.PLAIN, 20));
+
+
+//        Aadhaar :
+        verticalShift+=40;
+        labelAadhar = new JLabel("Aadhar : ");
+        labelAadhar.setBounds(40, verticalShift, 100, 30);
+        add(labelAadhar);
+        tfAadhar = new JTextField();
+        tfAadhar.setBounds(horizontalShift, verticalShift, textFieldArea, 30);
+        add(tfAadhar);
+        applyFontStyle(labelAadhar, tfAadhar);
 
 
 //        Phone :
         verticalShift+=40;
-        phoneLabel = new JLabel("Phone : ");
-        phoneLabel.setBounds(40, verticalShift, 100, 30);
-        add(phoneLabel);
+        labelPhone = new JLabel("Phone : ");
+        labelPhone.setBounds(40, verticalShift, 100, 30);
+        add(labelPhone);
         tfPhone = new JTextField();
-        tfPhone.setBounds(horizontalShift, verticalShift, 350, 30);
+        tfPhone.setBounds(horizontalShift, verticalShift, textFieldArea, 30);
         add(tfPhone);
-        applyFontStyle(phoneLabel, tfPhone);
+        applyFontStyle(labelPhone, tfPhone);
 
+
+//        Address :
+        verticalShift+=40;
+        labelAddress = new JLabel("Address : ");
+        labelAddress.setBounds(40, verticalShift, 100, 30);
+        add(labelAddress);
+        tfAddress = new JTextField();
+        tfAddress.setBounds(horizontalShift, verticalShift, textFieldArea, 30);
+        add(tfAddress);
+        applyFontStyle(labelAddress, tfAddress);
+
+
+
+
+//        Education :
+        String courses[] = {" ", "B.Tech", "BE", "BCA", "B.Sc","B.Com", "BA", "BBA", "MBA", "MCA", "M.Tech", "M.Sc", "PHD"};
+        verticalShift+=40;
+        labelEducation = new JLabel("Highest Education : ");
+        labelEducation.setBounds(40, verticalShift, 165, 30);
+        labelEducation.setFont(new Font("serif", Font.BOLD, 18));
+        add(labelEducation);
+
+        boxEducation = new JComboBox(courses);
+        boxEducation.setBounds(horizontalShift, verticalShift, textFieldArea, 30);
+        boxEducation.setFont(new Font("serif", Font.PLAIN, 18));
+        add(boxEducation);
 
 
 //        EmployeeId :
         verticalShift+=40;
-        employeeLabel = new JLabel("Employee ID : ");
-        employeeLabel.setBounds(40, verticalShift, 120, 30);
-        add(employeeLabel);
-        tfEmployeeId = new JTextField();
-        tfEmployeeId.setBounds(horizontalShift, verticalShift, 350, 30);
-        add(tfEmployeeId);
-        applyFontStyle(employeeLabel, tfEmployeeId);
+        labelEmployee = new JLabel("Employee ID : ");
+        labelEmployee.setBounds(40, verticalShift, 120, 30);
+        add(labelEmployee);
+        labelEmployee.setFont(new Font("serif", Font.BOLD, 18));
+
+        labelEmployeeID = new JLabel(" "+empNumber);
+        labelEmployeeID.setBounds(220, verticalShift, 120, 30);
+        add(labelEmployeeID);
+        labelEmployeeID.setFont(new Font("serif", Font.PLAIN, 18));
+
+
+//        JTextField tfEmployeeId = new JTextField(""+empNumber);
+//        tfEmployeeId.setBounds(horizontalShift, verticalShift, 350, 30);
+//        add(tfEmployeeId);
+//        applyFontStyle(labelEmployee, tfEmployeeId);
 
 
 //        Designation :
         verticalShift+=40;
-        designationLabel = new JLabel("Designation : ");
-        designationLabel.setBounds(40, verticalShift, 120, 30);
-        add(designationLabel);
+        labelDesignation = new JLabel("Designation : ");
+        labelDesignation.setBounds(40, verticalShift, 120, 30);
+        add(labelDesignation);
         tfDesignation = new JTextField();
-        tfDesignation.setBounds(horizontalShift, verticalShift, 350, 30);
+        tfDesignation.setBounds(horizontalShift, verticalShift, textFieldArea, 30);
         add(tfDesignation);
-        applyFontStyle(designationLabel, tfDesignation);
+        applyFontStyle(labelDesignation, tfDesignation);
 
 
 
 //        Salary :
         verticalShift+=40;
-        salaryLabel = new JLabel("Salary : ");
-        salaryLabel.setBounds(40, verticalShift, 120, 30);
-        add(salaryLabel);
+        labelSalary = new JLabel("Salary : ");
+        labelSalary.setBounds(40, verticalShift, 120, 30);
+        add(labelSalary);
         tfSalary = new JTextField();
-        tfSalary.setBounds(horizontalShift, verticalShift, 350, 30);
+        tfSalary.setBounds(horizontalShift, verticalShift, textFieldArea, 30);
         add(tfSalary);
-        applyFontStyle(salaryLabel, tfSalary);
-
-
-
-
-//        Address :
-        verticalShift+=40;
-        addressLabel = new JLabel("Address : ");
-        addressLabel.setBounds(40, verticalShift, 100, 30);
-        add(addressLabel);
-        tfAddress = new JTextField();
-        tfAddress.setBounds(horizontalShift, verticalShift, 350, 30);
-        add(tfAddress);
-        applyFontStyle(addressLabel, tfAddress);
+        applyFontStyle(labelSalary, tfSalary);
 
 
 //        Password :
         verticalShift+=40;
-        passwordLabel = new JLabel("Password : ");
-        passwordLabel.setBounds(40, verticalShift, 100, 30);
-        add(passwordLabel);
+        labelPassword = new JLabel("Password : ");
+        labelPassword.setBounds(40, verticalShift, 100, 30);
+        add(labelPassword);
         tfPassword = new JTextField();
-        tfPassword.setBounds(horizontalShift, verticalShift, 350, 30);
+        tfPassword.setBounds(horizontalShift, verticalShift, textFieldArea, 30);
         add(tfPassword);
-        applyFontStyle(passwordLabel, tfPassword);
+        applyFontStyle(labelPassword, tfPassword);
 
 
 //        Confirm Password :
         verticalShift+=40;
-        confirmPasswordLabel = new JLabel("Confirm Password : ");
-        confirmPasswordLabel.setBounds(40, verticalShift, 170, 30);
-        add(confirmPasswordLabel);
+        labelConfirmPassword = new JLabel("Confirm Password : ");
+        labelConfirmPassword.setBounds(40, verticalShift, 170, 30);
+        add(labelConfirmPassword);
         tfConfirmPassword = new JTextField();
-        tfConfirmPassword.setBounds(horizontalShift, verticalShift, 350, 30);
+        tfConfirmPassword.setBounds(horizontalShift, verticalShift, textFieldArea, 30);
         add(tfConfirmPassword);
-        applyFontStyle(confirmPasswordLabel, tfConfirmPassword);
+        applyFontStyle(labelConfirmPassword, tfConfirmPassword);
 
 
 //        Buttons : Register
-        buttonShiftVertical+=70;
-        registerButton = new JButton("Register");
-        registerButton.setBounds(horizontalShift, buttonShiftVertical, 150, 40);
-        registerButton.setBackground(Color.black);
-        registerButton.addActionListener(this::actionPerformed);
-        add(registerButton);
-        applyFontButton(registerButton);
+        buttonShiftVertical+=160;
+        buttonSubmit = new JButton("Submit");
+        buttonSubmit.setBounds(217, buttonShiftVertical, 150, 40);
+//        registerButton.setBackground(Color.black);
+        buttonSubmit.addActionListener(this::actionPerformed);
+        add(buttonSubmit);
+        applyFontButton(buttonSubmit);
+
+
+//        Button : Back
+        buttonBack = new JButton("Back");
+        buttonBack.setBounds(415, buttonShiftVertical, 150, 40);
+        buttonBack.setBackground(Color.black);
+        buttonBack.addActionListener(this::actionPerformed);
+        add(buttonBack);
+        applyFontButton(buttonBack);
 
 
 //        Buttons : Cancel
-        cancelButton = new JButton("Cancel");
-        cancelButton.setBounds(415, buttonShiftVertical, 150, 40);
-        cancelButton.setBackground(Color.black);
-        cancelButton.addActionListener(this::actionPerformed);
-        add(cancelButton);
-        applyFontButton(cancelButton);
+        buttonCancel = new JButton("Cancel");
+        buttonCancel.setBounds(613, buttonShiftVertical, 150, 40);
+        buttonCancel.setBackground(Color.black);
+        buttonCancel.addActionListener(this::actionPerformed);
+        add(buttonCancel);
+        applyFontButton(buttonCancel);
 
 
 
@@ -188,11 +236,38 @@ public class Registration extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==registerButton){
-            System.out.println("Registration Area : ");
+        if(e.getSource()== buttonSubmit){
             setVisible(false);
-            System.exit(0);
-        }else if(e.getSource()==cancelButton){
+            String name = tfName.getText();
+            String fatherName = tfFatherName.getText();
+            String email = tfEmail.getText();
+//            String dob = chooserDate.getDateEditor().getUiComponent().getText();
+            String aadhar = tfAadhar.getText();
+            String phone = tfPhone.getText();
+            String address = tfAddress.getText();
+            String education  = (String) boxEducation.getSelectedItem();
+            String employeeId = labelEmployeeID.getText();
+            String designation = tfDesignation.getText();
+            String salary = tfSalary.getText();
+            String password = tfPassword.getText();
+
+            try {
+                Conn c = new Conn();
+                String query = "insert into employees values(name, fatherName, email, dob, aadhar, phone, address, education, employeeId, designation, salary, password)"+"values(?, ?, ?, null, ?, ?, ?, ?, ?, ?, ?, ?)";
+                c.statement.executeUpdate(query);
+                JOptionPane.showMessageDialog(null, "Details Added Successfully.");
+                setVisible(false);
+                new Home();
+            }catch (Exception E){
+                E.printStackTrace();
+            }
+
+
+        }else if(e.getSource()==buttonBack){
+            setVisible(false);
+            new Home();
+        }
+        else if(e.getSource()== buttonCancel){
             System.out.println("Registration Cancelled ! ");
             setVisible(false);
             System.exit(0);
@@ -212,7 +287,6 @@ public class Registration extends JFrame implements ActionListener {
 
     public static void main(String[] args) {
         new Registration();
-
     }
 
 

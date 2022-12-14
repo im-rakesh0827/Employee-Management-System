@@ -9,11 +9,12 @@ import static Emp_Management_System.Registration.applyFontButton;
 import static Emp_Management_System.Registration.applyFontStyle;
 
 public class Login extends JFrame implements ActionListener {
-    private JTextField tfEmail;
-    private JTextField tfUsername;
+    private JTextField tfEmail, tfUsername;
     private final JPasswordField pfPassword;
-    private final JButton loginButton, registerButton;
-    private final JLabel password, userName;
+    private final JButton buttonLogin, buttonRegister;
+    private final JLabel labelPassword;
+    private JLabel labelUserName;
+    private final JLabel labelEmail;
 
 
     public Login(){
@@ -22,39 +23,38 @@ public class Login extends JFrame implements ActionListener {
         setLayout(null);
 
         int verticalShift = 100;
-
-        userName = new JLabel("Email : ");
-        userName.setBounds(40, verticalShift, 100, 30);
-        add(userName);
-        tfUsername = new JTextField();
-        tfUsername.setBounds(150, verticalShift, 270, 30);
-        add(tfUsername);
-        applyFontStyle(userName, tfUsername);
+        labelEmail = new JLabel("Email : ");
+        labelEmail.setBounds(40, verticalShift, 100, 30);
+        add(labelEmail);
+        tfEmail = new JTextField();
+        tfEmail.setBounds(150, verticalShift, 270, 30);
+        add(tfEmail);
+        applyFontStyle(labelEmail, tfEmail);
 
 
         verticalShift+=40;
-        password = new JLabel("Password : ");
-        password.setBounds(40, verticalShift, 100, 30);
-        add(password);
+        labelPassword = new JLabel("Password : ");
+        labelPassword.setBounds(40, verticalShift, 100, 30);
+        add(labelPassword);
         pfPassword = new JPasswordField();
         pfPassword.setBounds(150, verticalShift, 270, 30);
         add(pfPassword);
-        applyFontStyle(password, pfPassword);
+        applyFontStyle(labelPassword, pfPassword);
 
         verticalShift+=60;
-        loginButton = new JButton("Login");
-        loginButton.setBounds(150, verticalShift, 100, 40);
-        loginButton.setBackground(Color.black);
-        add(loginButton);
-        loginButton.addActionListener(this::actionPerformed);
-        applyFontButton(loginButton);
+        buttonLogin = new JButton("Login");
+        buttonLogin.setBounds(150, verticalShift, 100, 40);
+        buttonLogin.setBackground(Color.black);
+        add(buttonLogin);
+        buttonLogin.addActionListener(this::actionPerformed);
+        applyFontButton(buttonLogin);
 
-        registerButton = new JButton("Register");
-        registerButton.setBounds(320, verticalShift, 100, 40);
-        registerButton.setBackground(Color.black);
-        registerButton.addActionListener(this::actionPerformed);
-        add(registerButton);
-        applyFontButton(registerButton);
+        buttonRegister = new JButton("Register");
+        buttonRegister.setBounds(320, verticalShift, 100, 40);
+        buttonRegister.setBackground(Color.black);
+        buttonRegister.addActionListener(this::actionPerformed);
+        add(buttonRegister);
+        applyFontButton(buttonRegister);
 
 
 
@@ -78,43 +78,43 @@ public class Login extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==loginButton){
+        if(e.getSource()== buttonLogin){
             try {
-                final String DB_URL = "jdbc:mysql://localhost:3306/userdb";
-                final String USERNAME = "root";
-                final String PASSWORD = "Apple@0827";
-
                 String email = tfEmail.getText();
-                String password = String.valueOf(pfPassword.getPassword());
-//                String query = "select * registration where  email= '"+email+"' and password = '"+password+"'";
-
-                Connection connection = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
-//                Statement statement  = connection.createStatement();
-                String sql = "select * from registration where email=? and password=?";
-                PreparedStatement prepareStatement = connection.prepareStatement(sql);
-                prepareStatement.setString(1, email);
-                prepareStatement.setString(2, password);
-
-                ResultSet resultSet = prepareStatement.executeQuery();
-                if(resultSet.next()) {
-                    System.out.println("Login Successful : ");
+                String password  = String.valueOf(pfPassword.getPassword());
+                Conn c = new Conn();
+                String query = "select * from employees where email='"+email+"'and password = '"+password+"'";
+                ResultSet resultSet = c.statement.executeQuery(query);
+                if(resultSet.next()){
+                    JOptionPane.showMessageDialog(
+                            this,
+                            "Login Successful.",
+                            "Login Window",
+                            JOptionPane.ERROR_MESSAGE
+                    );
                     setVisible(false);
+                    new Home();
                 }
                 else{
                     JOptionPane.showMessageDialog(
-                            null,
-                            "Invalid Login Credential",
-                            "Try Again !",
+                            this,
+                            "Invalid UserName or Password !",
+                            "Try Again",
                             JOptionPane.ERROR_MESSAGE
                     );
                 }
+
             }catch (Exception E){
                 E.printStackTrace();
             }
-        }else if(e.getSource()==registerButton){
+
+
+
+        }else if(e.getSource()== buttonRegister){
             setVisible(false);
             new Registration();
         }
+
 
     }
 
