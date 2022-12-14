@@ -5,8 +5,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
-import static Emp_Management_System.Registration.applyFontButton;
-import static Emp_Management_System.Registration.applyFontStyle;
+
+import static Emp_Management_System.ApplyFontStyle.applyFontButtonBig;
+import static Emp_Management_System.ApplyFontStyle.applyFontStyle;
 
 public class Login extends JFrame implements ActionListener {
     private JTextField tfEmail, tfUsername;
@@ -47,14 +48,14 @@ public class Login extends JFrame implements ActionListener {
         buttonLogin.setBackground(Color.black);
         add(buttonLogin);
         buttonLogin.addActionListener(this::actionPerformed);
-        applyFontButton(buttonLogin);
+        applyFontButtonBig(buttonLogin);
 
         buttonRegister = new JButton("Register");
         buttonRegister.setBounds(320, verticalShift, 100, 40);
         buttonRegister.setBackground(Color.black);
         buttonRegister.addActionListener(this::actionPerformed);
         add(buttonRegister);
-        applyFontButton(buttonRegister);
+        applyFontButtonBig(buttonRegister);
 
 
 

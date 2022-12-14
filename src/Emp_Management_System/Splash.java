@@ -6,16 +6,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-import static Emp_Management_System.Registration.applyFontButton;
+import static Emp_Management_System.ApplyFontStyle.applyFontButtonBig;
 
 public class Splash extends JFrame implements ActionListener{
 
     JButton clickHere;
+    JLabel heading;
     public Splash(){
 
 
         getContentPane().setBackground(Color.white);
-        JLabel heading = new JLabel("WELCOME TO EMPLOYEE MANAGEMENT SYSTEM");
+        heading = new JLabel("WELCOME TO EMPLOYEE MANAGEMENT SYSTEM");
         setLayout(null);
         heading.setBounds(40, 40, 1200, 60);
         heading.setFont(new Font("serif", Font.BOLD, 40));
@@ -31,7 +32,7 @@ public class Splash extends JFrame implements ActionListener{
 
         clickHere = new JButton("Click Here To Continue");
         clickHere.setBounds(400, 400, 300, 70);
-        applyFontButton(clickHere);
+        applyFontButtonBig(clickHere);
         clickHere.setBackground(Color.BLACK);
         clickHere.addActionListener(this::actionPerformed);
         image.add(clickHere);

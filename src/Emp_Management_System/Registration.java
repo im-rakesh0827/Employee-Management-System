@@ -8,6 +8,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
 
+import static Emp_Management_System.ApplyFontStyle.applyFontButtonBig;
+import static Emp_Management_System.ApplyFontStyle.applyFontStyle;
+
 
 public class Registration extends JFrame implements ActionListener {
     JLabel labelName, labelFatherName, labelEmail, labelDOB, labelEducation, labelPhone, labelAadhar, labelEmployee, labelEmployeeID, labelDesignation, labelSalary, labelAddress, labelPassword, labelConfirmPassword;
@@ -204,7 +207,7 @@ public class Registration extends JFrame implements ActionListener {
 //        registerButton.setBackground(Color.black);
         buttonSubmit.addActionListener(this::actionPerformed);
         add(buttonSubmit);
-        applyFontButton(buttonSubmit);
+        applyFontButtonBig(buttonSubmit);
 
 
 //        Button : Back
@@ -213,7 +216,7 @@ public class Registration extends JFrame implements ActionListener {
         buttonBack.setBackground(Color.black);
         buttonBack.addActionListener(this::actionPerformed);
         add(buttonBack);
-        applyFontButton(buttonBack);
+        applyFontButtonBig(buttonBack);
 
 
 //        Buttons : Cancel
@@ -222,7 +225,7 @@ public class Registration extends JFrame implements ActionListener {
         buttonCancel.setBackground(Color.black);
         buttonCancel.addActionListener(this::actionPerformed);
         add(buttonCancel);
-        applyFontButton(buttonCancel);
+        applyFontButtonBig(buttonCancel);
 
 
 
@@ -253,7 +256,8 @@ public class Registration extends JFrame implements ActionListener {
 
             try {
                 Conn c = new Conn();
-                String query = "insert into employees values(name, fatherName, email, dob, aadhar, phone, address, education, employeeId, designation, salary, password)"+"values(?, ?, ?, null, ?, ?, ?, ?, ?, ?, ?, ?)";
+//                String query = "insert into employees values(name, fatherName, email, dob, aadhar, phone, address, education, employeeId, designation, salary, password)"+"values(?, ?, ?, null, ?, ?, ?, ?, ?, ?, ?, ?)";
+                String query  = "insert into temp(email, password)"+"values(?, ?)";
                 c.statement.executeUpdate(query);
                 JOptionPane.showMessageDialog(null, "Details Added Successfully.");
                 setVisible(false);
@@ -274,15 +278,18 @@ public class Registration extends JFrame implements ActionListener {
         }
     }
 
-    public static void applyFontStyle(JLabel label, JTextField field){
-        label.setFont(new Font("serif", Font.BOLD, 18));
-        field.setFont(new Font("serif", Font.PLAIN, 18));
-    }
-
-    public static void applyFontButton(JButton button){
-        button.setFont(new Font("serif", Font.BOLD, 20));
-    }
-
+//    public static void applyFontStyle(JLabel label, JTextField field){
+//        label.setFont(new Font("serif", Font.BOLD, 18));
+//        field.setFont(new Font("serif", Font.PLAIN, 18));
+//    }
+//
+//    public static void applyFontButtonBig(JButton button){
+//        button.setFont(new Font("serif", Font.BOLD, 20));
+//    }
+//
+//    public static void applyFontButtonSmall(JButton button){
+//        button.setFont(new Font("serif", Font.BOLD, 16));
+//    }
 
 
     public static void main(String[] args) {
