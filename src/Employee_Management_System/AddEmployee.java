@@ -1,10 +1,9 @@
-package Emp_Management_System;
+package Employee_Management_System;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class AddEmployee extends JFrame {
-
     AddEmployee(){
         getContentPane().setBackground(Color.lightGray);
         setLayout(null);
@@ -18,13 +17,9 @@ public class AddEmployee extends JFrame {
         setLocation(300, 50);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-
     }
 
     public static void main(String[] args) {
-
         new AddEmployee();
-
     }
 }

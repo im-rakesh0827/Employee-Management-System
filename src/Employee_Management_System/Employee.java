@@ -1,4 +1,4 @@
-package Emp_Management_System;
+package Employee_Management_System;
 
 public class Employee {
     public String name;

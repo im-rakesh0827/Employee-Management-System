@@ -1,4 +1,4 @@
-package Emp_Management_System;
+package Employee_Management_System;
 
 import javax.swing.*;
 import java.awt.*;
@@ -6,29 +6,37 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
 
-import static Emp_Management_System.ApplyFontStyle.applyFontButtonBig;
-import static Emp_Management_System.ApplyFontStyle.applyFontStyle;
+import static Employee_Management_System.ApplyFontStyle.*;
 
 public class Login extends JFrame implements ActionListener {
-    private JTextField tfEmail, tfUsername;
+
+    private final JLabel labelHeading, labelEmail, labelPassword;
+    private JTextField tfEmail;
     private final JPasswordField pfPassword;
-    private final JButton buttonLogin, buttonRegister;
-    private final JLabel labelPassword;
-    private JLabel labelUserName;
-    private final JLabel labelEmail;
+    private final JButton buttonLogin, buttonRegister, buttonBack;
+
+    private final JButton [] buttonArray;
+    private JLabel [] labelArray;
+    private JTextField [] textFieldArray;
+
 
 
     public Login(){
         getContentPane().setBackground(Color.white);
-//        getContentPane().setBackground(Color.lightGray);
         setLayout(null);
+
+
+        labelHeading = new JLabel("Login Form");
+        labelHeading.setBounds(250, 20, 190, 35);
+        labelHeading.setFont(new Font("serif", Font.BOLD, 35));
+        add(labelHeading);
 
         int verticalShift = 100;
         labelEmail = new JLabel("Email : ");
         labelEmail.setBounds(40, verticalShift, 100, 30);
         add(labelEmail);
         tfEmail = new JTextField();
-        tfEmail.setBounds(150, verticalShift, 270, 30);
+        tfEmail.setBounds(150, verticalShift, 360, 30);
         add(tfEmail);
         applyFontStyle(labelEmail, tfEmail);
 
@@ -38,38 +46,50 @@ public class Login extends JFrame implements ActionListener {
         labelPassword.setBounds(40, verticalShift, 100, 30);
         add(labelPassword);
         pfPassword = new JPasswordField();
-        pfPassword.setBounds(150, verticalShift, 270, 30);
+        pfPassword.setBounds(150, verticalShift, 360, 30);
         add(pfPassword);
         applyFontStyle(labelPassword, pfPassword);
 
+
+
+//        Login Button
         verticalShift+=60;
         buttonLogin = new JButton("Login");
         buttonLogin.setBounds(150, verticalShift, 100, 40);
         buttonLogin.setBackground(Color.black);
         add(buttonLogin);
         buttonLogin.addActionListener(this::actionPerformed);
-        applyFontButtonBig(buttonLogin);
 
+
+//        Button Back :
+        buttonBack = new JButton("Back");
+        buttonBack.setBounds(280, verticalShift, 100, 40);
+        buttonBack.setBackground(Color.black);
+        add(buttonBack);
+        buttonBack.addActionListener(this::actionPerformed);
+
+//        Register Button
         buttonRegister = new JButton("Register");
-        buttonRegister.setBounds(320, verticalShift, 100, 40);
+        buttonRegister.setBounds(410, verticalShift, 100, 40);
         buttonRegister.setBackground(Color.black);
         buttonRegister.addActionListener(this::actionPerformed);
         add(buttonRegister);
-        applyFontButtonBig(buttonRegister);
 
+        buttonArray = new JButton[]{buttonLogin, buttonBack, buttonRegister};
+        applyFontStyleButtonBig(buttonArray);
 
 
         ImageIcon image1 = new ImageIcon(ClassLoader.getSystemResource("icons/second.jpg"));
-        Image image2 = image1.getImage().getScaledInstance(200, 200, Image.SCALE_DEFAULT);
+        Image image2 = image1.getImage().getScaledInstance(230, 230, Image.SCALE_DEFAULT);
         ImageIcon image3 = new ImageIcon(image2);
         JLabel image = new JLabel(image3);
-        image.setBounds(470, 25, 200, 200);
+        image.setBounds(520, 55, 200, 200);
         add(image);
 
 
 
 
-        setSize(700, 400);
+        setSize(750, 400);
         setLocation(450, 200);
         setVisible(true);
 //        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -79,7 +99,7 @@ public class Login extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource()== buttonLogin){
+        if(e.getSource()==buttonLogin){
             try {
                 String email = tfEmail.getText();
                 String password  = String.valueOf(pfPassword.getPassword());
@@ -99,7 +119,7 @@ public class Login extends JFrame implements ActionListener {
                 else{
                     JOptionPane.showMessageDialog(
                             this,
-                            "Invalid UserName or Password !",
+                            "Invalid Email or Password !",
                             "Try Again",
                             JOptionPane.ERROR_MESSAGE
                     );
@@ -108,10 +128,11 @@ public class Login extends JFrame implements ActionListener {
             }catch (Exception E){
                 E.printStackTrace();
             }
-
-
-
-        }else if(e.getSource()== buttonRegister){
+        }else if(e.getSource()==buttonBack){
+            setVisible(false);
+            new Splash();
+        }
+        else if(e.getSource()== buttonRegister){
             setVisible(false);
             new Registration();
         }

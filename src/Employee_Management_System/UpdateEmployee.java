@@ -1,4 +1,4 @@
-package Emp_Management_System;
+package Employee_Management_System;
 
 import com.toedter.calendar.JDateChooser;
 
@@ -8,13 +8,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
 
-import static Emp_Management_System.ApplyFontStyle.applyFontButtonBig;
-import static Emp_Management_System.ApplyFontStyle.applyFontStyle;
+import static Employee_Management_System.ApplyFontStyle.applyFontButtonBig;
+import static Employee_Management_System.ApplyFontStyle.applyFontStyle;
 
+public class UpdateEmployee extends JFrame implements ActionListener {
 
-public class Registration extends JFrame implements ActionListener {
     JLabel labelName, labelFatherName, labelEmail, labelDOB, labelEducation, labelPhone, labelAadhar, labelEmployee, labelEmployeeID, labelDesignation, labelSalary, labelAddress, labelPassword, labelConfirmPassword;
-    JTextField tfName, tfFatherName, tfEmail, tfPhone, tfAadhar, tfDesignation, tfSalary, tfAddress, tfPassword, tfConfirmPassword;
+    JLabel tfName;
+    JTextField tfFatherName;
+    JTextField tfEmail;
+    JTextField tfPhone;
+    JTextField tfAadhar;
+    JTextField tfDesignation;
+    JTextField tfSalary;
+    JTextField tfAddress;
+    JTextField tfPassword;
+    JTextField tfConfirmPassword;
     JButton buttonSubmit, buttonBack, buttonCancel;
     JDateChooser chooserDate;
     JComboBox boxEducation;
@@ -22,7 +31,7 @@ public class Registration extends JFrame implements ActionListener {
     Random random = new Random();
     int empNumber = random.nextInt(999999);
 
-    Registration(){
+    UpdateEmployee(){
 //        getContentPane().setBackground(Color.LIGHT_GRAY);
 //        getContentPane().setBackground(Color.getHSBColor(120,260,150));
 
@@ -33,8 +42,8 @@ public class Registration extends JFrame implements ActionListener {
         int textFieldArea = 550;
 
 //        Heading :
-        JLabel heading  = new JLabel("REGISTRATION FORM");
-        heading.setBounds(175, 10, 500, 30);
+        JLabel heading  = new JLabel("UPDATE EMPLOYEE DETAILS");
+        heading.setBounds(125, 10, 600, 30);
         heading.setFont(new Font("serif",Font.BOLD, 40));
         heading.setBackground(Color.CYAN);
         add(heading);
@@ -43,10 +52,10 @@ public class Registration extends JFrame implements ActionListener {
         labelName = new JLabel("Name : ");
         labelName.setBounds(40, verticalShift, 100, 30);
         add(labelName);
-        tfName = new JTextField();
+        tfName = new JLabel();
         tfName.setBounds(horizontalShift, verticalShift, textFieldArea, 30);
         add(tfName);
-        applyFontStyle(labelName, tfName);
+//        applyFontStyle(labelName, tfName);
 
 
 
@@ -239,62 +248,10 @@ public class Registration extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource()== buttonSubmit){
-            setVisible(false);
-            String name = tfName.getText();
-            String fatherName = tfFatherName.getText();
-            String email = tfEmail.getText();
-//            String dob = chooserDate.getDateEditor().getUiComponent().getText();
-            String aadhar = tfAadhar.getText();
-            String phone = tfPhone.getText();
-            String address = tfAddress.getText();
-            String education  = (String) boxEducation.getSelectedItem();
-            String employeeId = labelEmployeeID.getText();
-            String designation = tfDesignation.getText();
-            String salary = tfSalary.getText();
-            String password = tfPassword.getText();
 
-            try {
-                Conn c = new Conn();
-//                String query = "insert into employees values(name, fatherName, email, dob, aadhar, phone, address, education, employeeId, designation, salary, password)"+"values(?, ?, ?, null, ?, ?, ?, ?, ?, ?, ?, ?)";
-                String query  = "insert into temp(email, password)"+"values(?, ?)";
-                c.statement.executeUpdate(query);
-                JOptionPane.showMessageDialog(null, "Details Added Successfully.");
-                setVisible(false);
-                new Home();
-            }catch (Exception E){
-                E.printStackTrace();
-            }
-
-
-        }else if(e.getSource()==buttonBack){
-            setVisible(false);
-            new Home();
-        }
-        else if(e.getSource()== buttonCancel){
-            System.out.println("Registration Cancelled ! ");
-            setVisible(false);
-            System.exit(0);
-        }
     }
-
-//    public static void applyFontStyle(JLabel label, JTextField field){
-//        label.setFont(new Font("serif", Font.BOLD, 18));
-//        field.setFont(new Font("serif", Font.PLAIN, 18));
-//    }
-//
-//    public static void applyFontButtonBig(JButton button){
-//        button.setFont(new Font("serif", Font.BOLD, 20));
-//    }
-//
-//    public static void applyFontButtonSmall(JButton button){
-//        button.setFont(new Font("serif", Font.BOLD, 16));
-//    }
-
 
     public static void main(String[] args) {
-        new Registration();
+        new UpdateEmployee();
     }
-
-
 }

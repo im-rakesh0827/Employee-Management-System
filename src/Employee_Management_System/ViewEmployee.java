@@ -1,4 +1,4 @@
-package Emp_Management_System;
+package Employee_Management_System;
 
 import net.proteanit.sql.DbUtils;
 
@@ -10,7 +10,7 @@ import java.awt.print.PrinterException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static Emp_Management_System.ApplyFontStyle.applyFontButtonSmall;
+import static Employee_Management_System.ApplyFontStyle.applyFontStyleButtonSmall;
 
 public class ViewEmployee extends JFrame implements ActionListener {
     JTable table;
@@ -19,12 +19,16 @@ public class ViewEmployee extends JFrame implements ActionListener {
     JScrollPane jScrollPane;
     JButton buttonSearch, buttonPrint, buttonUpdate, buttonBack;
 
+    JButton [] smallButtonArray;
+    JLabel [] labelArray;
+    JTextField [] textFieldArray;
+
     ViewEmployee(){
         getContentPane().setBackground(Color.WHITE);
         setLayout(null);
 
         labelSearch = new JLabel("Search Employee ID : ");
-        labelSearch.setBounds(20, 20, 250, 30);
+        labelSearch.setBounds(20, 20, 200, 30);
         labelSearch.setFont(new Font("serif", Font.BOLD, 20));
         add(labelSearch);
 
@@ -34,33 +38,34 @@ public class ViewEmployee extends JFrame implements ActionListener {
         choiceData.add("Choose");
         add(choiceData);
 
-        buttonSearch = new JButton("Search");
+
+//        Buttons Area :
         int buttonHeight = 35;
         int buttonWidth = 150;
         int verticalButtonShift = 70;
-
+        buttonSearch = new JButton("Search");
         buttonSearch.setBounds(20, verticalButtonShift, buttonWidth, buttonHeight);
-        applyFontButtonSmall(buttonSearch);
         buttonSearch.addActionListener(this::actionPerformed);
         add(buttonSearch);
 
         buttonPrint = new JButton("Print");
         buttonPrint.setBounds(200, verticalButtonShift, buttonWidth, buttonHeight);
-        applyFontButtonSmall(buttonPrint);
         buttonPrint.addActionListener(this::actionPerformed);
         add(buttonPrint);
 
         buttonUpdate = new JButton("Update");
         buttonUpdate.setBounds(380, verticalButtonShift, buttonWidth, buttonHeight);
-        applyFontButtonSmall(buttonUpdate);
         buttonUpdate.addActionListener(this::actionPerformed);
         add(buttonUpdate);
 
         buttonBack = new JButton("Back");
         buttonBack.setBounds(560, verticalButtonShift, buttonWidth, buttonHeight);
-        applyFontButtonSmall(buttonBack);
         buttonBack.addActionListener(this::actionPerformed);
         add(buttonBack);
+
+//        Applying fonts & styles on all the buttons :
+        smallButtonArray = new JButton[] {buttonSearch, buttonPrint, buttonUpdate, buttonBack};
+        applyFontStyleButtonSmall(smallButtonArray);
 
 
         try {
@@ -104,7 +109,7 @@ public class ViewEmployee extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==buttonSearch){
-           String query = "select * from employees where employeeId= '"+choiceData.getSelectedItem()+"'";
+           String query = "select * from employees where employeeId = '"+choiceData.getSelectedItem()+"'";
            try {
                Conn c = new Conn();
                ResultSet resultSet = c.statement.executeQuery(query);
