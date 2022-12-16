@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-import static Employee_Management_System.ApplyFontStyle.applyFontButtonBig;
+import static Employee_Management_System.ApplyFontStyle.applyFontStyleButtonBig;
 
 public class Splash extends JFrame implements ActionListener{
 
@@ -15,43 +15,70 @@ public class Splash extends JFrame implements ActionListener{
     JButton buttonHome;
     JButton buttonHelp;
     JButton buttonSupport;
-    JLabel heading;
+    JLabel labelHeading;
     public Splash(){
         getContentPane().setBackground(Color.white);
-        heading = new JLabel("WELCOME TO EMPLOYEE MANAGEMENT SYSTEM");
+        labelHeading = new JLabel("WELCOME TO EMPLOYEE MANAGEMENT SYSTEM");
         setLayout(null);
-        heading.setBounds(75, 40, 1020, 60);
-        heading.setFont(new Font("serif", Font.BOLD, 40));
-        heading.setForeground(Color.GRAY);
-        add(heading);
+        labelHeading.setBounds(75, 40, 1020, 60);
+        labelHeading.setFont(new Font("serif", Font.BOLD, 40));
+        labelHeading.setForeground(Color.YELLOW);
+        add(labelHeading);
 
         ImageIcon image1 = new ImageIcon(ClassLoader.getSystemResource("icons/front.jpg"));
-        Image image2 = image1.getImage().getScaledInstance(1100, 700, Image.SCALE_DEFAULT);
+        Image image2 = image1.getImage().getScaledInstance(1170, 750, Image.SCALE_DEFAULT);
         ImageIcon image3 = new ImageIcon(image2);
         JLabel image = new JLabel(image3);
-        image.setBounds(50, 100, 1070, 600);
+        image.setBounds(0, 0, 1170, 750);
         add(image);
 
         buttonClickHere = new JButton("Click Here To Continue");
-        buttonClickHere.setBounds(400, 480, 300, 70);
-        applyFontButtonBig(buttonClickHere);
-        buttonClickHere.setBackground(Color.BLACK);
+        buttonClickHere.setBounds(400, 560, 300, 70);
+        buttonClickHere.setForeground(Color.BLUE);
         buttonClickHere.addActionListener(this::actionPerformed);
+        applyFontStyleButtonBig(new JButton[]{buttonClickHere});
         image.add(buttonClickHere);
 
+
         setSize(1170, 750);
-        setLocation(200, 50);
+        setLocation(140, 50);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
+
+        blinkLabel(labelHeading);
+        blinkButton(buttonClickHere);
+
+
+
+    }
+
+    public static void blinkButton(JButton button){
         while (true){
-            heading.setVisible(false);
+            button.setVisible(false);
             try {
                 Thread.sleep(350);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            heading.setVisible(true);
+            button.setVisible(true);
+            try {
+                Thread.sleep(1050);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+    }
+    public static void blinkLabel(JLabel label){
+        while (true){
+            label.setVisible(false);
+            try {
+                Thread.sleep(350);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            label.setVisible(true);
             try {
                 Thread.sleep(1050);
             } catch (InterruptedException e) {
@@ -59,7 +86,6 @@ public class Splash extends JFrame implements ActionListener{
             }
 
         }
-
     }
 
     @Override

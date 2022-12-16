@@ -5,37 +5,45 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.*;
 import java.util.Random;
-import static Employee_Management_System.ApplyFontStyle.*;
+
+import static Employee_Management_System.ApplyFontStyle.applyFontStyleButtonBig;
+import static Employee_Management_System.ApplyFontStyle.applyFontStyleLabelField;
+
 public class Registration extends JFrame implements ActionListener {
-    JLabel labelName, labelFatherName, labelEmail, labelDOB, labelEducation, labelPhone, labelAadhar, labelEmployee, labelEmployeeID, labelDesignation, labelSalary, labelAddress, labelPassword, labelConfirmPassword;
-    JTextField tfName, tfFatherName, tfEmail, tfPhone, tfAadhar, tfDesignation, tfSalary, tfAddress, tfPassword, tfConfirmPassword;
+    JLabel labelName, labelFatherName, labelEmail, labelDOB, labelAadhar, labelPhone, labelAddress, labelEducation, labelEmployeeID, labelDesignation, labelSalary,  labelPassword, labelConfirmPassword;
+    JLabel  labelEmployee;
+    JTextField tfName, tfFatherName, tfEmail,  tfAadhar, tfPhone, tfAddress,  tfDesignation, tfSalary, tfPassword, DOB;
     JButton buttonSubmit, buttonBack, buttonCancel;
     JDateChooser chooserDate;
     JComboBox boxEducation;
+    JPasswordField pfConfirmPassword;
+    JFrame frame;
 
     JButton [] buttonArray;
     JLabel [] labelArray;
     JTextField [] textFieldArray;
-
     Random random = new Random();
     int empNumber = random.nextInt(999999);
 
     Registration(){
-//        getContentPane().setBackground(Color.LIGHT_GRAY);
-//        getContentPane().setBackground(Color.getHSBColor(120,260,150));
-
         setLayout(null);
+//        getContentPane().setBackground(Color.getHSBColor(120,258,150));
+//        getContentPane().setBackground(Color.WHITE);
+//        applyColorFrameBackground();
+
+
+
         int horizontalShift = 215;
         int verticalShift = 60;
         int buttonShiftVertical = 440;
         int textFieldArea = 550;
-
 //        Heading :
         JLabel heading  = new JLabel("REGISTRATION FORM");
-        heading.setBounds(175, 10, 500, 30);
+        heading.setBounds(260, 15, 500, 30);
         heading.setFont(new Font("serif",Font.BOLD, 40));
-        heading.setBackground(Color.CYAN);
+        heading.setForeground(Color.BLACK);
         add(heading);
 
 //        Name :
@@ -45,7 +53,7 @@ public class Registration extends JFrame implements ActionListener {
         tfName = new JTextField();
         tfName.setBounds(horizontalShift, verticalShift, textFieldArea, 30);
         add(tfName);
-        applyFontStyle(labelName, tfName);
+//        applyFontStyle(labelName, tfName);
 
 
 
@@ -53,12 +61,11 @@ public class Registration extends JFrame implements ActionListener {
         verticalShift+=40;
         labelFatherName = new JLabel("Father's Name : ");
         labelFatherName.setBounds(40, verticalShift, 130, 30);
-        labelFatherName.setFont(new Font("serif", Font.BOLD, 18));
         add(labelFatherName);
         tfFatherName = new JTextField();
         tfFatherName.setBounds(horizontalShift, verticalShift, textFieldArea, 30);
         add(tfFatherName);
-        applyFontStyle(labelFatherName, tfFatherName);
+//        applyFontStyle(labelFatherName, tfFatherName);
 
 
 
@@ -70,20 +77,25 @@ public class Registration extends JFrame implements ActionListener {
         tfEmail = new JTextField();
         tfEmail.setBounds(horizontalShift, verticalShift, textFieldArea, 30);
         add(tfEmail);
-        applyFontStyle(labelEmail, tfEmail);
+//        applyFontStyle(labelEmail, tfEmail);
 
 
 //        Date Of Birth
         verticalShift+=40;
         labelDOB = new JLabel("DOB : ");
         labelDOB.setBounds(40, verticalShift, 100, 30);
-        labelDOB.setFont(new Font("serif", Font.BOLD, 18));
         add(labelDOB);
 
         chooserDate = new JDateChooser();
-        chooserDate.setBounds(horizontalShift, verticalShift, textFieldArea, 25);
-        add(chooserDate);
-        chooserDate.setFont(new Font("serif", Font.PLAIN, 20));
+//        chooserDate.setBounds(horizontalShift, verticalShift, textFieldArea, 25);
+//        add(chooserDate);
+//        chooserDate.setFont(new Font("serif", Font.PLAIN, 20));
+
+        DOB = new JTextField();
+        DOB.setBounds(horizontalShift, verticalShift, textFieldArea, 25);
+        DOB.setFont(new Font("serif", Font.PLAIN, 20));
+        add(DOB);
+
 
 
 //        Aadhaar :
@@ -94,7 +106,7 @@ public class Registration extends JFrame implements ActionListener {
         tfAadhar = new JTextField();
         tfAadhar.setBounds(horizontalShift, verticalShift, textFieldArea, 30);
         add(tfAadhar);
-        applyFontStyle(labelAadhar, tfAadhar);
+//        applyFontStyle(labelAadhar, tfAadhar);
 
 
 //        Phone :
@@ -105,7 +117,7 @@ public class Registration extends JFrame implements ActionListener {
         tfPhone = new JTextField();
         tfPhone.setBounds(horizontalShift, verticalShift, textFieldArea, 30);
         add(tfPhone);
-        applyFontStyle(labelPhone, tfPhone);
+//        applyFontStyle(labelPhone, tfPhone);
 
 
 //        Address :
@@ -116,8 +128,7 @@ public class Registration extends JFrame implements ActionListener {
         tfAddress = new JTextField();
         tfAddress.setBounds(horizontalShift, verticalShift, textFieldArea, 30);
         add(tfAddress);
-        applyFontStyle(labelAddress, tfAddress);
-
+//        applyFontStyle(labelAddress, tfAddress);
 
 
 
@@ -125,7 +136,7 @@ public class Registration extends JFrame implements ActionListener {
         String courses[] = {" ", "B.Tech", "BE", "BCA", "B.Sc","B.Com", "BA", "BBA", "MBA", "MCA", "M.Tech", "M.Sc", "PHD"};
         verticalShift+=40;
         labelEducation = new JLabel("Highest Education : ");
-        labelEducation.setBounds(40, verticalShift, 165, 30);
+        labelEducation.setBounds(40, verticalShift, 160, 30);
         labelEducation.setFont(new Font("serif", Font.BOLD, 18));
         add(labelEducation);
 
@@ -140,8 +151,6 @@ public class Registration extends JFrame implements ActionListener {
         labelEmployee = new JLabel("Employee ID : ");
         labelEmployee.setBounds(40, verticalShift, 120, 30);
         add(labelEmployee);
-        labelEmployee.setFont(new Font("serif", Font.BOLD, 18));
-
         labelEmployeeID = new JLabel(" "+empNumber);
         labelEmployeeID.setBounds(220, verticalShift, 120, 30);
         add(labelEmployeeID);
@@ -162,7 +171,7 @@ public class Registration extends JFrame implements ActionListener {
         tfDesignation = new JTextField();
         tfDesignation.setBounds(horizontalShift, verticalShift, textFieldArea, 30);
         add(tfDesignation);
-        applyFontStyle(labelDesignation, tfDesignation);
+//        applyFontStyle(labelDesignation, tfDesignation);
 
 
 
@@ -174,7 +183,8 @@ public class Registration extends JFrame implements ActionListener {
         tfSalary = new JTextField();
         tfSalary.setBounds(horizontalShift, verticalShift, textFieldArea, 30);
         add(tfSalary);
-        applyFontStyle(labelSalary, tfSalary);
+//        applyFontStyle(labelSalary, tfSalary);
+
 
 
 //        Password :
@@ -185,7 +195,7 @@ public class Registration extends JFrame implements ActionListener {
         tfPassword = new JTextField();
         tfPassword.setBounds(horizontalShift, verticalShift, textFieldArea, 30);
         add(tfPassword);
-        applyFontStyle(labelPassword, tfPassword);
+//        applyFontStyle(labelPassword, tfPassword);
 
 
 //        Confirm Password :
@@ -193,10 +203,18 @@ public class Registration extends JFrame implements ActionListener {
         labelConfirmPassword = new JLabel("Confirm Password : ");
         labelConfirmPassword.setBounds(40, verticalShift, 170, 30);
         add(labelConfirmPassword);
-        tfConfirmPassword = new JTextField();
-        tfConfirmPassword.setBounds(horizontalShift, verticalShift, textFieldArea, 30);
-        add(tfConfirmPassword);
-        applyFontStyle(labelConfirmPassword, tfConfirmPassword);
+
+
+        pfConfirmPassword = new JPasswordField();
+        pfConfirmPassword.setBounds(horizontalShift, verticalShift, textFieldArea, 30);
+        add(pfConfirmPassword);
+//        tfConfirmPassword = new JTextField();
+//        tfConfirmPassword.setBounds(horizontalShift, verticalShift, textFieldArea, 30);
+//        add(tfConfirmPassword);
+//        applyFontStyle(labelConfirmPassword, tfConfirmPassword);
+
+
+
 
 
 
@@ -220,16 +238,21 @@ public class Registration extends JFrame implements ActionListener {
 //        Buttons : Cancel
         buttonCancel = new JButton("Cancel");
         buttonCancel.setBounds(613, buttonShiftVertical, 150, 40);
-        buttonCancel.setBackground(Color.black);
         buttonCancel.addActionListener(this::actionPerformed);
         add(buttonCancel);
+
+
+//        Applying Font and Style on Buttons, Labels and TextField :
+        labelArray = new JLabel[]{labelName, labelFatherName, labelEmail, labelDOB, labelEducation, labelPhone, labelAadhar, labelEmployee, labelEmployeeID, labelDesignation, labelSalary, labelAddress, labelPassword, labelConfirmPassword,};
+        textFieldArray = new JTextField[]{tfName, tfFatherName, tfEmail, tfPhone, tfAadhar, tfDesignation, tfSalary, tfAddress, tfPassword};
+        applyFontStyleLabelField(labelArray, textFieldArray);
 
         buttonArray = new JButton[]{buttonSubmit, buttonBack, buttonCancel};
         applyFontStyleButtonBig(buttonArray);
 
 
         setSize(850, 700);
-        setLocation(330, 80);
+        setLocation(300, 80);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
@@ -239,32 +262,11 @@ public class Registration extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()== buttonSubmit){
-            setVisible(false);
-            String name = tfName.getText();
-            String fatherName = tfFatherName.getText();
-            String email = tfEmail.getText();
-//            String dob = chooserDate.getDateEditor().getUiComponent().getText();
-            String aadhar = tfAadhar.getText();
-            String phone = tfPhone.getText();
-            String address = tfAddress.getText();
-            String education  = (String) boxEducation.getSelectedItem();
-            String employeeId = labelEmployeeID.getText();
-            String designation = tfDesignation.getText();
-            String salary = tfSalary.getText();
-            String password = tfPassword.getText();
-
             try {
-                Conn c = new Conn();
-//                String query = "insert into employees values(name, fatherName, email, dob, aadhar, phone, address, education, employeeId, designation, salary, password)"+"values(?, ?, ?, null, ?, ?, ?, ?, ?, ?, ?, ?)";
-                String query  = "insert into temp(email, password)"+"values(?, ?)";
-                c.statement.executeUpdate(query);
-                JOptionPane.showMessageDialog(null, "Details Added Successfully.");
-                setVisible(false);
-                new Home();
-            }catch (Exception E){
-                E.printStackTrace();
+                registerEmployee();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
             }
-
 
         }else if(e.getSource()==buttonBack){
             setVisible(false);
@@ -276,8 +278,134 @@ public class Registration extends JFrame implements ActionListener {
             System.exit(0);
         }
     }
+//    Can I use it in global scope : if yes then how
+//    public void applyColorFrameBackground(){
+////        getContentPane().setBackground(Color.BLUE);
+//        getContentPane().setBackground(Color.getHSBColor(120,258,150));
+//
+//    }
+
+
+//    public void registerUser1(){
+//        try {
+//            Conn connection = new Conn();
+//            String query = "insert into employees (name, fatherName, email, dob, aadhar, phone, address, education, employeeId, designation, salary, password)"+"values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+////                String query  = "insert into temp(email, password)"+"values(?, ?)";
+//            connection.statement.executeUpdate(query);
+//            JOptionPane.showMessageDialog(null, "Details Added Successfully.");
+//            setVisible(false);
+//            new Home();
+//        }catch (Exception E){
+//            E.printStackTrace();
+//        }
+//    }
+
+
+    public void registerEmployee() throws SQLException {
+        setVisible(false);
+        String name = tfName.getText();
+        String fatherName = tfFatherName.getText();
+        String email = tfEmail.getText();
+        String dob = DOB.getText();
+        String aadhar = tfAadhar.getText();
+        String phone = tfPhone.getText();
+        String address = tfAddress.getText();
+        String education  = (String) boxEducation.getSelectedItem();
+        String employeeId = labelEmployeeID.getText();
+        String designation = tfDesignation.getText();
+        String salary = tfSalary.getText();
+        String password = tfPassword.getText();
+        String confirmPassword = String.valueOf(pfConfirmPassword.getPassword());
+//        String [] dataArray = {name, fatherName, email, dob, aadhar, phone, address, education, employeeId, designation, salary, password};
+//        boolean flag = true;
+//        for(String data:dataArray){
+//            if(data.isEmpty()){
+//                flag = false;
+//                break;
+//            }
+//        }
+//        if(!flag){
+//            frame = new JFrame();
+//            if(JOptionPane.showConfirmDialog(frame, "Enter Details Carefully", "Details Missing !", JOptionPane.CLOSED_OPTION)==JOptionPane.CLOSED_OPTION){
+//                new Registration();
+//            }
+//        }
+
+        employee = addUserToDatabase(name, fatherName, email, dob, aadhar, phone, address, education, employeeId, designation, salary, password);
+        if(name.isEmpty() || fatherName.isEmpty() || email.isEmpty() || dob.isEmpty() || aadhar.isEmpty() || phone.isEmpty() || address.isEmpty() || education.isEmpty() || employeeId.isEmpty() || designation.isEmpty() || salary.isEmpty() || password.isEmpty()){
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Enter Details Carefully",
+                        "Details Missing !",
+                        JOptionPane.ERROR_MESSAGE
+                );
+        }
+        if(!password.equals(confirmPassword)){
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Re-Enter Confirm Password...",
+                    "Password Mismatch ! ",
+                    JOptionPane.ERROR_MESSAGE
+            );
+        }
+        if(employee !=null){
+            System.out.println("Successfully Registered : ");
+            setVisible(false);
+        }else{
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Failed to register new user : ",
+                    "Try Again !",
+                    JOptionPane.ERROR_MESSAGE
+            );
+            setVisible(false);
+        }
+    }
+    Connection connection;
+    Statement statement;
+    String query;
+    PreparedStatement preparedStatement;
+    public Employee employee;
+
+    private Employee addUserToDatabase(String name,String fatherName, String email, String dob, String aadhar, String phone, String address, String education, String employeeId, String designation, String salary, String password) throws SQLException {
+        final String DB_URL = "jdbc:mysql://localhost:3306/userdb";
+        final String USERNAME = "root";
+        final String PASSWORD = "Apple@0827";
+        try {
+            connection = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
+            statement = connection.createStatement();
+            query = "insert into employees(name, fatherName, email, dob, aadhar, phone, address, education, employeeId, designation, salary, password)"+"values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, fatherName);
+            preparedStatement.setString(3, email);
+            preparedStatement.setString(4, dob);
+            preparedStatement.setString(5, aadhar);
+            preparedStatement.setString(6, phone);
+            preparedStatement.setString(7, address);
+            preparedStatement.setString(8, education);
+            preparedStatement.setString(9, employeeId);
+            preparedStatement.setString(10, designation);
+            preparedStatement.setString(11, salary);
+            preparedStatement.setString(12, password);
+
+            int addedRows = preparedStatement.executeUpdate();
+            if(addedRows>0){
+                employee = new Employee();
+                employee.name = name;
+                employee.email = email;
+                employee.phone = phone;
+
+            }
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return employee;
+    }
+
     public static void main(String[] args) {
         new Registration();
+
     }
 
 

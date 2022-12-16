@@ -22,23 +22,23 @@ public class Login extends JFrame implements ActionListener {
 
 
     public Login(){
-        getContentPane().setBackground(Color.white);
         setLayout(null);
+        getContentPane().setBackground(Color.WHITE);
 
 
         labelHeading = new JLabel("Login Form");
-        labelHeading.setBounds(250, 20, 190, 35);
+        labelHeading.setBounds(250, 25, 190, 35);
         labelHeading.setFont(new Font("serif", Font.BOLD, 35));
         add(labelHeading);
 
-        int verticalShift = 100;
+        int verticalShift = 110;
         labelEmail = new JLabel("Email : ");
         labelEmail.setBounds(40, verticalShift, 100, 30);
         add(labelEmail);
         tfEmail = new JTextField();
         tfEmail.setBounds(150, verticalShift, 360, 30);
         add(tfEmail);
-        applyFontStyle(labelEmail, tfEmail);
+//        applyFontStyle(labelEmail, tfEmail);
 
 
         verticalShift+=40;
@@ -48,7 +48,7 @@ public class Login extends JFrame implements ActionListener {
         pfPassword = new JPasswordField();
         pfPassword.setBounds(150, verticalShift, 360, 30);
         add(pfPassword);
-        applyFontStyle(labelPassword, pfPassword);
+//        applyFontStyle(labelPassword, pfPassword);
 
 
 
@@ -56,7 +56,6 @@ public class Login extends JFrame implements ActionListener {
         verticalShift+=60;
         buttonLogin = new JButton("Login");
         buttonLogin.setBounds(150, verticalShift, 100, 40);
-        buttonLogin.setBackground(Color.black);
         add(buttonLogin);
         buttonLogin.addActionListener(this::actionPerformed);
 
@@ -64,19 +63,26 @@ public class Login extends JFrame implements ActionListener {
 //        Button Back :
         buttonBack = new JButton("Back");
         buttonBack.setBounds(280, verticalShift, 100, 40);
-        buttonBack.setBackground(Color.black);
         add(buttonBack);
         buttonBack.addActionListener(this::actionPerformed);
 
 //        Register Button
         buttonRegister = new JButton("Register");
         buttonRegister.setBounds(410, verticalShift, 100, 40);
-        buttonRegister.setBackground(Color.black);
         buttonRegister.addActionListener(this::actionPerformed);
         add(buttonRegister);
 
+
+
+//        Applying Font & Styles on : Labels, Fields & Buttons
+        labelArray = new JLabel[]{labelEmail, labelPassword};
+        textFieldArray = new JTextField[]{tfEmail, pfPassword};
+        applyFontStyleLabelField(labelArray, textFieldArray);
         buttonArray = new JButton[]{buttonLogin, buttonBack, buttonRegister};
         applyFontStyleButtonBig(buttonArray);
+
+
+
 
 
         ImageIcon image1 = new ImageIcon(ClassLoader.getSystemResource("icons/second.jpg"));
@@ -89,8 +95,8 @@ public class Login extends JFrame implements ActionListener {
 
 
 
-        setSize(750, 400);
-        setLocation(450, 200);
+        setSize(720, 400);
+        setLocation(360, 220);
         setVisible(true);
 //        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -99,7 +105,7 @@ public class Login extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==buttonLogin){
+        if(e.getSource().equals(buttonLogin)){
             try {
                 String email = tfEmail.getText();
                 String password  = String.valueOf(pfPassword.getPassword());
@@ -115,8 +121,7 @@ public class Login extends JFrame implements ActionListener {
                     );
                     setVisible(false);
                     new Home();
-                }
-                else{
+                }else{
                     JOptionPane.showMessageDialog(
                             this,
                             "Invalid Email or Password !",
@@ -128,11 +133,11 @@ public class Login extends JFrame implements ActionListener {
             }catch (Exception E){
                 E.printStackTrace();
             }
-        }else if(e.getSource()==buttonBack){
+        }else if(e.getSource().equals(buttonBack)){
             setVisible(false);
             new Splash();
         }
-        else if(e.getSource()== buttonRegister){
+        else if(e.getSource().equals(buttonRegister)){
             setVisible(false);
             new Registration();
         }

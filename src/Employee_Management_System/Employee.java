@@ -13,4 +13,8 @@ public class Employee {
     public String designation;
     public String salary;
     public String password;
+
+    Employee(){
+
+    }
 }

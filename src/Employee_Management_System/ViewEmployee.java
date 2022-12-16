@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import static Employee_Management_System.ApplyFontStyle.applyFontStyleButtonSmall;
+import static Employee_Management_System.ConfirmChoice.confirmOptionYesNo;
 
 public class ViewEmployee extends JFrame implements ActionListener {
     JTable table;
@@ -34,8 +35,7 @@ public class ViewEmployee extends JFrame implements ActionListener {
 
         choiceData = new Choice();
         choiceData.setBounds(220, 20, 150, 30);
-        choiceData.setFont(new Font("serif", Font.PLAIN, 14));
-        choiceData.add("Choose");
+        choiceData.setFont(new Font("serif", Font.PLAIN, 15));
         add(choiceData);
 
 
@@ -48,30 +48,35 @@ public class ViewEmployee extends JFrame implements ActionListener {
         buttonSearch.addActionListener(this::actionPerformed);
         add(buttonSearch);
 
+//        Button : Print
         buttonPrint = new JButton("Print");
         buttonPrint.setBounds(200, verticalButtonShift, buttonWidth, buttonHeight);
         buttonPrint.addActionListener(this::actionPerformed);
         add(buttonPrint);
 
+//        Button : Update
         buttonUpdate = new JButton("Update");
         buttonUpdate.setBounds(380, verticalButtonShift, buttonWidth, buttonHeight);
         buttonUpdate.addActionListener(this::actionPerformed);
         add(buttonUpdate);
 
+//        Button : Back
         buttonBack = new JButton("Back");
         buttonBack.setBounds(560, verticalButtonShift, buttonWidth, buttonHeight);
         buttonBack.addActionListener(this::actionPerformed);
         add(buttonBack);
 
+
 //        Applying fonts & styles on all the buttons :
         smallButtonArray = new JButton[] {buttonSearch, buttonPrint, buttonUpdate, buttonBack};
         applyFontStyleButtonSmall(smallButtonArray);
-
 
         try {
             Conn c = new Conn();
             String query = "select * from employees";
             ResultSet resultSet = c.statement.executeQuery(query);
+            choiceData.add("None");
+            choiceData.add("All");
             while (resultSet.next()){
                 choiceData.add(resultSet.getString("employeeId"));
             }
@@ -80,24 +85,30 @@ public class ViewEmployee extends JFrame implements ActionListener {
         }
 
 
+//        It will print the entire table data :
+//        table = new JTable();
+//        try {
+//            Conn c = new Conn();
+//            String query = "select * from employees";
+//            ResultSet resultSet = c.statement.executeQuery(query);
+//            table.setModel(DbUtils.resultSetToTableModel(resultSet));
+//            table.setFont(new Font("serif", Font.PLAIN, 15));
+//            table.setBounds(0, 150, 1170, 400);
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+
+
         table = new JTable();
-        try {
-            Conn c = new Conn();
-            String query = "select * from employees";
-            ResultSet resultSet = c.statement.executeQuery(query);
-            table.setModel(DbUtils.resultSetToTableModel(resultSet));
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
         jScrollPane = new JScrollPane(table);
-        jScrollPane.setBounds(0, 150, 900, 400);
+        jScrollPane.setBounds(0, 150, 1170, 400);
+        jScrollPane.setFont(new Font("serif", Font.PLAIN, 28));
+        table.setBounds(0, 150, 1170, 80);
         add(jScrollPane);
 
 
-        setSize(900, 700);
-        setLocation(300, 100);
+        setSize(1170, 750);
+        setLocation(145, 50);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
@@ -109,11 +120,31 @@ public class ViewEmployee extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==buttonSearch){
-           String query = "select * from employees where employeeId = '"+choiceData.getSelectedItem()+"'";
            try {
-               Conn c = new Conn();
-               ResultSet resultSet = c.statement.executeQuery(query);
-               table.setModel(DbUtils.resultSetToTableModel(resultSet));
+               Conn connection = new Conn();
+               String query = "";
+               ResultSet resultSet=null;
+               if(choiceData.getSelectedItem().equals("None")){
+                   JOptionPane.showMessageDialog(
+                           this,
+                           "Select  EmployeeId First : ",
+                           "Try Again!",
+                           JOptionPane.INFORMATION_MESSAGE
+                   );
+               }else if(choiceData.getSelectedItem().equals("All")){
+                   query = "select * from employees";
+                   resultSet = connection.statement.executeQuery(query);
+                   table.setModel(DbUtils.resultSetToTableModel(resultSet));
+//                   table.setFont(new Font("serif", Font.PLAIN, 14));
+               }else{
+                   query = "select * from employees where employeeId = '"+choiceData.getSelectedItem()+"'";
+                   resultSet = connection.statement.executeQuery(query);
+                   table.setModel(DbUtils.resultSetToTableModel(resultSet));
+//                   table.setFont(new Font("serif", Font.PLAIN, 14));
+               }
+               table.setFont(new Font("serif", Font.PLAIN, 15));
+
+
            }catch (Exception E){
                E.printStackTrace();
            }
@@ -123,9 +154,24 @@ public class ViewEmployee extends JFrame implements ActionListener {
             } catch (PrinterException ex) {
                 throw new RuntimeException(ex);
             }
+        }else if(e.getSource()==buttonUpdate){
+            if(!choiceData.getSelectedItem().equals("")){
+                setVisible(false);
+                new UpdateEmployee(choiceData.getSelectedItem());
+            }else{
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Select  EmployeeId First : ",
+                        "Try Again!",
+                        JOptionPane.ERROR_MESSAGE
+                );
+            }
         }else if(e.getSource()==buttonBack){
-            setVisible(false);
-            new Home();
+            if(confirmOptionYesNo()) {
+                setVisible(false);
+                new Home();
+            }
+
         }
 
     }

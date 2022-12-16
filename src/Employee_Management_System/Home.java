@@ -11,10 +11,10 @@ public class Home extends JFrame implements ActionListener {
     Home(){
         setLayout(null);
         ImageIcon image1 = new ImageIcon(ClassLoader.getSystemResource("icons/home.jpg"));
-        Image image2 = image1.getImage().getScaledInstance(1120, 630, Image.SCALE_DEFAULT);
+        Image image2 = image1.getImage().getScaledInstance(1170, 750, Image.SCALE_DEFAULT);
         ImageIcon image3 = new ImageIcon(image2);
         JLabel image = new JLabel(image3);
-        image.setBounds(0, 0, 1120, 630);
+        image.setBounds(0, 0, 1170, 750);
         add(image);
 
         JLabel heading = new JLabel("Employee Management System");
@@ -50,8 +50,10 @@ public class Home extends JFrame implements ActionListener {
         image.add(deleteEmp);
 
 
-        setSize(1120, 630);
-        setLocation(250, 100);
+//        setSize(1120, 630);
+        setSize(1170, 750);
+
+        setLocation(145, 50);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
