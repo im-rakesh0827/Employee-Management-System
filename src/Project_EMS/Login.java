@@ -1,4 +1,4 @@
-package Employee_Management_System;
+package Project_EMS;
 
 import javax.swing.*;
 import java.awt.*;
@@ -6,7 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
 
-import static Employee_Management_System.ApplyFontStyle.*;
+import static Project_EMS.ApplyFontStyle.*;
+import static Project_EMS.ConfirmChoice.confirmOptionYesNo;
 
 public class Login extends JFrame implements ActionListener {
 
@@ -134,8 +135,11 @@ public class Login extends JFrame implements ActionListener {
                 E.printStackTrace();
             }
         }else if(e.getSource().equals(buttonBack)){
-            setVisible(false);
-            new Splash();
+            if(confirmOptionYesNo()){
+                setVisible(false);
+                new Registration();
+            }
+
         }
         else if(e.getSource().equals(buttonRegister)){
             setVisible(false);

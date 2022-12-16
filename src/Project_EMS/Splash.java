@@ -1,4 +1,4 @@
-package Employee_Management_System;
+package Project_EMS;
 
 import javax.swing.*;
 import java.awt.*;
@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-import static Employee_Management_System.ApplyFontStyle.applyFontStyleButtonBig;
+import static Project_EMS.ApplyFontStyle.applyFontStyleButtonBig;
 
 public class Splash extends JFrame implements ActionListener{
 

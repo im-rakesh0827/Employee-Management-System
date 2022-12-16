@@ -1,4 +1,4 @@
-package Employee_Management_System;
+package Project_EMS;
 
 import com.toedter.calendar.JDateChooser;
 
@@ -8,10 +8,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import  java.sql.*;
-import static Employee_Management_System.ApplyFontStyle.*;
-import static Employee_Management_System.ApplyFontStyle.applyFontStyleButtonBig;
-import static Employee_Management_System.ApplyFontStyle.applyFontStyleLabelField;
-import static Employee_Management_System.ConfirmChoice.*;
+
+import static Project_EMS.ApplyFontStyle.applyFontStyleButtonBig;
+import static Project_EMS.ApplyFontStyle.applyFontStyleLabelField;
+import static Project_EMS.ConfirmChoice.*;
 
 public class UpdateEmployee extends JFrame implements ActionListener {
     JLabel labelName,labelNameFixed, labelFatherName, labelEmail, labelDOB,labelDobFixed, labelAadhar, labelAadharFixed, labelPhone, labelAddress, labelEducation, labelEmployeeID, labelEmployee, labelDesignation, labelSalary,  labelPassword, labelConfirmPassword;
@@ -293,41 +293,53 @@ public class UpdateEmployee extends JFrame implements ActionListener {
             String email = tfEmail.getText();
             String phone = tfPhone.getText();
             String address = tfAddress.getText();
-            String eduction = tfEducation.getText();
+            String education = tfEducation.getText();
             String designation = tfDesignation.getText();
             String salary = tfSalary.getText();
             String password = tfPassword.getText();
             String confirmPassword = String.valueOf(pfConfirmPassword.getPassword());
-            String [] dataArray = {fatherName, email, phone, address, eduction, designation, salary, password, confirmPassword};
-            boolean flag = true;
-            for(String data:dataArray){
-                if(data.isEmpty()){
-                    flag = false;
+            String [] dataArray = {fatherName, email, phone, address, education, designation, salary, password, confirmPassword};
+            try {
+                boolean flag = true;
+                for(String data:dataArray){
+                    if(data.isEmpty()){
+                        flag = false;
+//                        break;
+                    }
+                    if(!flag){
+//                    frame = new JFrame();
+                        if(JOptionPane.showConfirmDialog(this, "Enter Details Carefully", "Details Missing !", JOptionPane.CLOSED_OPTION)==JOptionPane.CLOSED_OPTION){
+                            new UpdateEmployee(null);
+                        }
+                    }
                     break;
+
                 }
-            }
-            if(!flag){
-                frame = new JFrame();
-                if(JOptionPane.showConfirmDialog(frame, "Enter Details Carefully", "Details Missing !", JOptionPane.CLOSED_OPTION)==JOptionPane.CLOSED_OPTION){
-                    dispose();
+                if(!password.equals(confirmPassword)){
+                    JOptionPane.showMessageDialog(
+                            this,
+                            "Re-Enter Confirm Password...",
+                            "Password Mismatch ! ",
+                            JOptionPane.ERROR_MESSAGE
+                    );
+
                 }
-            }else if(!password.equals(confirmPassword)){
+
+                Conn connection = new Conn();
+                String query = "update employees set fatherName ='"+fatherName+"', email='"+email+"', phone='"+phone+"', address='"+address+"', education='"+education+"', designation='"+designation+"', salary='"+salary+"', password='"+password+"' where employeeId='"+employeeId+"'  ";
+                connection.statement.executeUpdate(query);
                 JOptionPane.showMessageDialog(
                         this,
-                        "Re-Enter Confirm Password...",
-                        "Password Mismatch ! ",
+                        "Details Updated Successfully",
+                        "Congratulation",
                         JOptionPane.ERROR_MESSAGE
                 );
-
+                setVisible(false);
+                new Home();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
             }
 
-//            try {
-//                Conn connection = new Conn();
-//                String query = "update employee set name = ";
-//                connection.statement.executeUpdate(query);
-//            } catch (SQLException ex) {
-//                throw new RuntimeException(ex);
-//            }
         }else if(e.getSource()==buttonBack){
             if(confirmOptionYesNo()){
                 setVisible(false);

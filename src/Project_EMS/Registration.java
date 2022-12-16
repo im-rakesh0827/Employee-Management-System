@@ -1,4 +1,4 @@
-package Employee_Management_System;
+package Project_EMS;
 
 import com.toedter.calendar.JDateChooser;
 import javax.swing.*;
@@ -8,8 +8,8 @@ import java.awt.event.ActionListener;
 import java.sql.*;
 import java.util.Random;
 
-import static Employee_Management_System.ApplyFontStyle.applyFontStyleButtonBig;
-import static Employee_Management_System.ApplyFontStyle.applyFontStyleLabelField;
+import static Project_EMS.ApplyFontStyle.applyFontStyleButtonBig;
+import static Project_EMS.ApplyFontStyle.applyFontStyleLabelField;
 
 public class Registration extends JFrame implements ActionListener {
     JLabel labelName, labelFatherName, labelEmail, labelDOB, labelAadhar, labelPhone, labelAddress, labelEducation, labelEmployeeID, labelDesignation, labelSalary,  labelPassword, labelConfirmPassword;
@@ -133,7 +133,7 @@ public class Registration extends JFrame implements ActionListener {
 
 
 //        Education :
-        String courses[] = {" ", "B.Tech", "BE", "BCA", "B.Sc","B.Com", "BA", "BBA", "MBA", "MCA", "M.Tech", "M.Sc", "PHD"};
+        String courses[] = {" ", "B.Tech", "BE", "BCA", "B.Sc","B.Com", "BA", "BBA", "MBA", "MCA", "M.Tech", "M.Sc", "PHD", "Other"};
         verticalShift+=40;
         labelEducation = new JLabel("Highest Education : ");
         labelEducation.setBounds(40, verticalShift, 160, 30);
@@ -269,8 +269,8 @@ public class Registration extends JFrame implements ActionListener {
             }
 
         }else if(e.getSource()==buttonBack){
-            setVisible(false);
-            new Login();
+//            setVisible(false);
+//            new Login();
         }
         else if(e.getSource()== buttonCancel){
             System.out.println("Registration Cancelled ! ");
@@ -302,7 +302,6 @@ public class Registration extends JFrame implements ActionListener {
 
 
     public void registerEmployee() throws SQLException {
-        setVisible(false);
         String name = tfName.getText();
         String fatherName = tfFatherName.getText();
         String email = tfEmail.getText();
@@ -347,10 +346,10 @@ public class Registration extends JFrame implements ActionListener {
                     "Password Mismatch ! ",
                     JOptionPane.ERROR_MESSAGE
             );
-        }
-        if(employee !=null){
+        } else if(employee !=null){
             System.out.println("Successfully Registered : ");
             setVisible(false);
+//            new Home();
         }else{
             JOptionPane.showMessageDialog(
                     this,
@@ -358,7 +357,7 @@ public class Registration extends JFrame implements ActionListener {
                     "Try Again !",
                     JOptionPane.ERROR_MESSAGE
             );
-            setVisible(false);
+//            setVisible(false);
         }
     }
     Connection connection;
@@ -388,25 +387,20 @@ public class Registration extends JFrame implements ActionListener {
             preparedStatement.setString(10, designation);
             preparedStatement.setString(11, salary);
             preparedStatement.setString(12, password);
-
             int addedRows = preparedStatement.executeUpdate();
             if(addedRows>0){
                 employee = new Employee();
                 employee.name = name;
                 employee.email = email;
                 employee.phone = phone;
-
             }
         }catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
         return employee;
     }
-
     public static void main(String[] args) {
         new Registration();
-
     }
-
 
 }

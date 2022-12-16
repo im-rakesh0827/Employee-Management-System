@@ -1,4 +1,4 @@
-package Employee_Management_System;
+package Project_EMS;
 
 import net.proteanit.sql.DbUtils;
 
@@ -10,8 +10,8 @@ import java.awt.print.PrinterException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static Employee_Management_System.ApplyFontStyle.applyFontStyleButtonSmall;
-import static Employee_Management_System.ConfirmChoice.confirmOptionYesNo;
+import static Project_EMS.ApplyFontStyle.applyFontStyleButtonSmall;
+import static Project_EMS.ConfirmChoice.confirmOptionYesNo;
 
 public class ViewEmployee extends JFrame implements ActionListener {
     JTable table;
@@ -119,7 +119,7 @@ public class ViewEmployee extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==buttonSearch){
+        if(e.getSource().equals(buttonSearch)){
            try {
                Conn connection = new Conn();
                String query = "";
@@ -148,13 +148,13 @@ public class ViewEmployee extends JFrame implements ActionListener {
            }catch (Exception E){
                E.printStackTrace();
            }
-        }else if(e.getSource()== buttonPrint){
+        }else if(e.getSource().equals(buttonPrint)){
             try {
                 table.print();
             } catch (PrinterException ex) {
                 throw new RuntimeException(ex);
             }
-        }else if(e.getSource()==buttonUpdate){
+        }else if(e.getSource().equals(buttonUpdate)){
             if(!choiceData.getSelectedItem().equals("")){
                 setVisible(false);
                 new UpdateEmployee(choiceData.getSelectedItem());
@@ -166,7 +166,7 @@ public class ViewEmployee extends JFrame implements ActionListener {
                         JOptionPane.ERROR_MESSAGE
                 );
             }
-        }else if(e.getSource()==buttonBack){
+        }else if(e.getSource().equals(buttonBack)){
             if(confirmOptionYesNo()) {
                 setVisible(false);
                 new Home();

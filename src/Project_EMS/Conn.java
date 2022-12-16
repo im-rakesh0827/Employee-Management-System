@@ -1,4 +1,4 @@
-package Employee_Management_System;
+package Project_EMS;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

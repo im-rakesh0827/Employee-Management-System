@@ -1,4 +1,4 @@
-package Employee_Management_System;
+package Project_EMS;
 
 import javax.swing.*;
 import java.awt.*;
@@ -63,16 +63,16 @@ public class Home extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if(e.getSource()==addEmp){
+        if(e.getSource().equals(addEmp)){
             setVisible(false);
             new Registration();
-        }if(e.getSource()==viewEmp){
+        }if(e.getSource().equals(viewEmp)){
             setVisible(false);
             new ViewEmployee();
-        }if(e.getSource()==updateEmp){
+        }if(e.getSource().equals(updateEmp)){
             setVisible(false);
-            System.exit(0);
-        }if(e.getSource()==deleteEmp){
+            new ViewEmployee();
+        }if(e.getSource().equals(deleteEmp)){
             setVisible(false);
         }
 

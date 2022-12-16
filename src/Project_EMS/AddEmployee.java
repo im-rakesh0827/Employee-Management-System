@@ -1,7 +1,6 @@
-package Employee_Management_System;
+package Project_EMS;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class AddEmployee extends JFrame {
 //    AddEmployee(){
