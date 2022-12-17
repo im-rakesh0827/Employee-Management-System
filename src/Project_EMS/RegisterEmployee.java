@@ -328,6 +328,7 @@ public class RegisterEmployee extends JFrame implements ActionListener {
         String salary = tfSalary.getText();
         String password = tfPassword.getText();
         String confirmPassword = String.valueOf(pfConfirmPassword.getPassword());
+
 //        String [] dataArray = {name, fatherName, email, dob, aadhar, phone, address, education, employeeId, designation, salary, password};
 //        boolean flag = true;
 //        for(String data:dataArray){
@@ -342,6 +343,7 @@ public class RegisterEmployee extends JFrame implements ActionListener {
 //                new Registration();
 //            }
 //        }
+
 
         employee = addUserToDatabase(name, fatherName, email, dob, aadhar, phone, address, education, employeeId, designation, salary, password);
         if(name.isEmpty() || fatherName.isEmpty() || email.isEmpty() || dob.isEmpty() || aadhar.isEmpty() || phone.isEmpty() || address.isEmpty() || education.isEmpty() || employeeId.isEmpty() || designation.isEmpty() || salary.isEmpty() || password.isEmpty()){
@@ -406,6 +408,15 @@ public class RegisterEmployee extends JFrame implements ActionListener {
                 employee.name = name;
                 employee.email = email;
                 employee.phone = phone;
+                employee.aadhar = aadhar;
+                employee.address = address;
+                employee.employeeId = employeeId;
+                employee.designation = designation;
+                employee.fatherName = fatherName;
+                employee.password = password;
+                employee.salary = salary;
+                employee.education = education;
+                employee.dob = dob;
             }
         }catch (SQLException e) {
             e.printStackTrace();
@@ -414,6 +425,7 @@ public class RegisterEmployee extends JFrame implements ActionListener {
     }
     public static void main(String[] args) {
         new RegisterEmployee();
+        new Employee();
     }
 
 }

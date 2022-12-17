@@ -24,7 +24,6 @@ public class LoginAdmin extends JFrame implements ActionListener {
 
     public LoginAdmin(){
         setLayout(null);
-//        getContentPane().setBackground(Color.WHITE);
         getContentPane().setBackground(Color.getHSBColor(120,258,150));
 
 
