@@ -335,7 +335,7 @@ public class UpdateEmployee extends JFrame implements ActionListener {
                         JOptionPane.ERROR_MESSAGE
                 );
                 setVisible(false);
-                new Home();
+                new AdminPanel();
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }

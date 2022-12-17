@@ -10,8 +10,9 @@ import java.util.Random;
 
 import static Project_EMS.ApplyFontStyle.applyFontStyleButtonBig;
 import static Project_EMS.ApplyFontStyle.applyFontStyleLabelField;
+import static Project_EMS.ConfirmChoice.confirmOptionYesNo;
 
-public class Registration extends JFrame implements ActionListener {
+public class RegisterEmployee extends JFrame implements ActionListener {
     JLabel labelName, labelFatherName, labelEmail, labelDOB, labelAadhar, labelPhone, labelAddress, labelEducation, labelEmployeeID, labelDesignation, labelSalary,  labelPassword, labelConfirmPassword;
     JLabel  labelEmployee;
     JTextField tfName, tfFatherName, tfEmail,  tfAadhar, tfPhone, tfAddress,  tfDesignation, tfSalary, tfPassword, DOB;
@@ -27,7 +28,7 @@ public class Registration extends JFrame implements ActionListener {
     Random random = new Random();
     int empNumber = random.nextInt(999999);
 
-    Registration(){
+    RegisterEmployee(){
         setLayout(null);
 //        getContentPane().setBackground(Color.getHSBColor(120,258,150));
 //        getContentPane().setBackground(Color.WHITE);
@@ -261,21 +262,33 @@ public class Registration extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource()== buttonSubmit){
-            try {
-                registerEmployee();
-            } catch (SQLException ex) {
-                throw new RuntimeException(ex);
+        if(e.getSource().equals(buttonSubmit)){
+            if(confirmOptionYesNo()){
+                try {
+                    registerEmployee();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
 
-        }else if(e.getSource()==buttonBack){
-//            setVisible(false);
-//            new Login();
+        }else if(e.getSource().equals(buttonBack)){
+            if(confirmOptionYesNo()){
+                setVisible(false);
+                new LoginEmployee();
+            }
         }
-        else if(e.getSource()== buttonCancel){
-            System.out.println("Registration Cancelled ! ");
-            setVisible(false);
-            System.exit(0);
+        else if(e.getSource().equals(buttonCancel)){
+            if(confirmOptionYesNo()){
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Press Ok To Go Home",
+                        "Registration Cancelled!",
+                        JOptionPane.ERROR_MESSAGE
+                );
+                setVisible(false);
+                new Home();
+            }
+
         }
     }
 //    Can I use it in global scope : if yes then how
@@ -400,7 +413,7 @@ public class Registration extends JFrame implements ActionListener {
         return employee;
     }
     public static void main(String[] args) {
-        new Registration();
+        new RegisterEmployee();
     }
 
 }

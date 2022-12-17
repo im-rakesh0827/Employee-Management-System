@@ -155,13 +155,13 @@ public class ViewEmployee extends JFrame implements ActionListener {
                 throw new RuntimeException(ex);
             }
         }else if(e.getSource().equals(buttonUpdate)){
-            if(!choiceData.getSelectedItem().equals("")){
+            if((!choiceData.getSelectedItem().equals("All")) && (!choiceData.getSelectedItem().equals("None"))){
                 setVisible(false);
                 new UpdateEmployee(choiceData.getSelectedItem());
             }else{
                 JOptionPane.showMessageDialog(
                         this,
-                        "Select  EmployeeId First : ",
+                        "OOPS, Select An  EmployeeId...",
                         "Try Again!",
                         JOptionPane.ERROR_MESSAGE
                 );
@@ -169,7 +169,7 @@ public class ViewEmployee extends JFrame implements ActionListener {
         }else if(e.getSource().equals(buttonBack)){
             if(confirmOptionYesNo()) {
                 setVisible(false);
-                new Home();
+                new AdminPanel();
             }
 
         }

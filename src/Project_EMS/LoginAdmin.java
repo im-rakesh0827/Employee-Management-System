@@ -9,26 +9,27 @@ import java.sql.*;
 import static Project_EMS.ApplyFontStyle.*;
 import static Project_EMS.ConfirmChoice.confirmOptionYesNo;
 
-public class Login extends JFrame implements ActionListener {
+public class LoginAdmin extends JFrame implements ActionListener {
 
-    private final JLabel labelHeading, labelEmail, labelPassword;
-    private JTextField tfEmail;
-    private final JPasswordField pfPassword;
-    private final JButton buttonLogin, buttonRegister, buttonBack;
+    JLabel labelHeading, labelEmail, labelPassword;
+    JTextField tfEmail;
+    JPasswordField pfPassword;
+    JButton buttonLogin, buttonRegister, buttonBack;
 
-    private final JButton [] buttonArray;
-    private JLabel [] labelArray;
-    private JTextField [] textFieldArray;
+    JButton [] buttonArray;
+    JLabel [] labelArray;
+    JTextField [] textFieldArray;
 
 
 
-    public Login(){
+    public LoginAdmin(){
         setLayout(null);
-        getContentPane().setBackground(Color.WHITE);
+//        getContentPane().setBackground(Color.WHITE);
+        getContentPane().setBackground(Color.getHSBColor(120,258,150));
 
 
-        labelHeading = new JLabel("Login Form");
-        labelHeading.setBounds(250, 25, 190, 35);
+        labelHeading = new JLabel("Login Form : Admin");
+        labelHeading.setBounds(170, 25, 320, 35);
         labelHeading.setFont(new Font("serif", Font.BOLD, 35));
         add(labelHeading);
 
@@ -61,17 +62,19 @@ public class Login extends JFrame implements ActionListener {
         buttonLogin.addActionListener(this::actionPerformed);
 
 
-//        Button Back :
-        buttonBack = new JButton("Back");
-        buttonBack.setBounds(280, verticalShift, 100, 40);
-        add(buttonBack);
-        buttonBack.addActionListener(this::actionPerformed);
 
 //        Register Button
         buttonRegister = new JButton("Register");
-        buttonRegister.setBounds(410, verticalShift, 100, 40);
+        buttonRegister.setBounds(280, verticalShift, 100, 40);
         buttonRegister.addActionListener(this::actionPerformed);
         add(buttonRegister);
+
+//        Button Back :
+        buttonBack = new JButton("Back");
+        buttonBack.setBounds(410, verticalShift, 100, 40);
+        add(buttonBack);
+        buttonBack.addActionListener(this::actionPerformed);
+
 
 
 
@@ -121,7 +124,7 @@ public class Login extends JFrame implements ActionListener {
                             JOptionPane.ERROR_MESSAGE
                     );
                     setVisible(false);
-                    new Home();
+                    new AdminPanel();
                 }else{
                     JOptionPane.showMessageDialog(
                             this,
@@ -134,24 +137,25 @@ public class Login extends JFrame implements ActionListener {
             }catch (Exception E){
                 E.printStackTrace();
             }
+        }else if(e.getSource().equals(buttonRegister)){
+            if(confirmOptionYesNo()){
+                setVisible(false);
+                new UpdateEmployee(null);
+            }
+
         }else if(e.getSource().equals(buttonBack)){
             if(confirmOptionYesNo()){
                 setVisible(false);
-                new Registration();
+                new Home();
             }
 
-        }
-        else if(e.getSource().equals(buttonRegister)){
-            setVisible(false);
-            new Registration();
         }
 
 
     }
 
-
     public static void main(String[] args) {
-        new Login();
+        new LoginAdmin();
     }
 
 

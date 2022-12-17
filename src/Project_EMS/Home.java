@@ -4,82 +4,89 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+
+import static Project_EMS.ApplyFontStyle.applyFontStyleButtonBig;
+import static Project_EMS.ConfirmChoice.confirmOptionYesNo;
 
 public class Home extends JFrame implements ActionListener {
 
-    JButton addEmp, viewEmp, updateEmp, deleteEmp;
-    Home(){
+    JLabel labelHeading, labelEmail, labelPassword;
+    JTextField tfEmail;
+    JPasswordField pfPassword;
+    JButton buttonAdmin, buttonBack, buttonEmployee;
+
+    JButton [] buttonArray;
+    JLabel [] labelArray;
+    JTextField [] textFieldArray;
+
+
+    public Home(){
         setLayout(null);
-        ImageIcon image1 = new ImageIcon(ClassLoader.getSystemResource("icons/home.jpg"));
-        Image image2 = image1.getImage().getScaledInstance(1170, 750, Image.SCALE_DEFAULT);
-        ImageIcon image3 = new ImageIcon(image2);
-        JLabel image = new JLabel(image3);
-        image.setBounds(0, 0, 1170, 750);
-        add(image);
+        getContentPane().setBackground(Color.WHITE);
 
-        JLabel heading = new JLabel("Employee Management System");
-        heading.setBounds(650, 20, 450, 50);
-        heading.setFont(new Font("serif", Font.BOLD, 30));
-        image.add(heading);
+        labelHeading = new JLabel("Employee Management Login Form");
+        labelHeading.setBounds(220, 125, 700, 50);
+        labelHeading.setFont(new Font("serif", Font.BOLD, 45));
+        add(labelHeading);
 
+        int verticalShift = 260;
+        int horizontalShift = 135;
 
-        addEmp = new JButton("Add");
-        addEmp.setBounds(650, 90, 150, 40);
-        addEmp.setFont(new Font("serif", Font.PLAIN, 20));
-        addEmp.addActionListener(this::actionPerformed);
-        image.add(addEmp);
+//        Login Button
+        verticalShift+=60;
+        buttonAdmin = new JButton("ADMIN");
+        buttonAdmin.setBounds(horizontalShift, verticalShift, 250, 70);
+        add(buttonAdmin);
+        buttonAdmin.addActionListener(this::actionPerformed);
 
+//        Button Back :
+        horizontalShift+=320;
+        buttonEmployee = new JButton("EMPLOYEE");
+        buttonEmployee.setBounds(horizontalShift, verticalShift, 250, 70);
+        add(buttonEmployee);
+        buttonEmployee.addActionListener(this::actionPerformed);
 
-        viewEmp = new JButton("View");
-        viewEmp.setBounds(860, 90, 150, 40);
-        viewEmp.setFont(new Font("serif", Font.PLAIN, 20));
-        viewEmp.addActionListener(this::actionPerformed);
-        image.add(viewEmp);
-
-
-        updateEmp = new JButton("Update");
-        updateEmp.setBounds(650, 150, 150, 40);
-        updateEmp.setFont(new Font("serif", Font.PLAIN, 20));
-        updateEmp.addActionListener(this::actionPerformed);
-        image.add(updateEmp);
-
-        deleteEmp = new JButton("Delete");
-        deleteEmp.setBounds(860, 150, 150, 40);
-        deleteEmp.setFont(new Font("serif", Font.PLAIN, 20));
-        deleteEmp.addActionListener(this::actionPerformed);
-        image.add(deleteEmp);
+//        Register Button
+        horizontalShift+=320;
+        buttonBack = new JButton("BACK");
+        buttonBack.setBounds(horizontalShift, verticalShift, 250, 70);
+        buttonBack.addActionListener(this::actionPerformed);
+        add(buttonBack);
 
 
-//        setSize(1120, 630);
+//        Applying Font & Styles on : Labels, Fields & Buttons
+        buttonArray = new JButton[]{buttonAdmin, buttonEmployee, buttonBack};
+        applyFontStyleButtonBig(buttonArray);
+
+
         setSize(1170, 750);
-
-        setLocation(145, 50);
+        setLocation(140, 50);
         setVisible(true);
+//        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
     }
 
-
     @Override
     public void actionPerformed(ActionEvent e) {
-
-        if(e.getSource().equals(addEmp)){
+        if(e.getSource().equals(buttonAdmin)){
             setVisible(false);
-            new Registration();
-        }if(e.getSource().equals(viewEmp)){
+            new LoginAdmin();
+        }else if(e.getSource().equals(buttonEmployee)){
             setVisible(false);
-            new ViewEmployee();
-        }if(e.getSource().equals(updateEmp)){
-            setVisible(false);
-            new ViewEmployee();
-        }if(e.getSource().equals(deleteEmp)){
-            setVisible(false);
+            new LoginEmployee();
+        }else if(e.getSource().equals(buttonBack)){
+            if(confirmOptionYesNo()){
+                setVisible(false);
+//                new Splash();
+            }
         }
 
+
     }
+
     public static void main(String[] args) {
         new Home();
     }
-
-
 }
