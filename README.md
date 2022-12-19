@@ -7,8 +7,8 @@ Tech Stack Used : Java / Java Swing and MySQL Database
 Employee Management System is a distributed application, developed to maintain the details of employees working in any organization.
 The EMS has been developed to override the problems prevailing in the practicing manual system.
 It maintains the information about the personal and official details of the employees.
-Qualities of EMS:-
 
+**Qualities of EMS:-**
 Helps in maintaining the computerized employee details.
 Create new users to the system accordingly.
 Search the details of Employees.
@@ -24,7 +24,7 @@ Search a Record.
 View a List of All Employee
 To develop an well-designed database to store employee information and Provides full functional reports to management of Company. 
 
-Vriables : Used To Take Input From Employee :
+**Vriables : Used To Take Input From Employee :**
 name;
 fatherName;
 email;
@@ -38,15 +38,15 @@ designation;
 salary;
 password;
     
+**Data Structure Used :-**
 Operators
-Array
-Structures
+Array /ArrayList
 Loops
 Functions
 Structure Array
 
 
-Working:-
+**Working:-**
 Struct Employee:- Defines the Structure of Employee Details 
 Add Employee:- Used for data entry 
 Search/View Employee:- Used to search for a particular employee or retrive an employee details 
