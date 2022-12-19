@@ -1,7 +1,5 @@
 package Project_EMS;
-
 import net.proteanit.sql.DbUtils;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,7 +11,7 @@ import java.sql.SQLException;
 import static Project_EMS.ApplyFontStyle.applyFontStyleButtonSmall;
 import static Project_EMS.ConfirmChoice.confirmOptionYesNo;
 
-public class ViewEmployee extends JFrame implements ActionListener {
+public class Update extends JFrame implements ActionListener {
     JTable table;
     Choice choiceData;
     JLabel labelSearch;
@@ -24,7 +22,7 @@ public class ViewEmployee extends JFrame implements ActionListener {
     JLabel [] labelArray;
     JTextField [] textFieldArray;
 
-    ViewEmployee(){
+    Update(){
         getContentPane().setBackground(Color.WHITE);
         setLayout(null);
 
@@ -55,10 +53,10 @@ public class ViewEmployee extends JFrame implements ActionListener {
         add(buttonPrint);
 
 //        Button : Update
-//        buttonUpdate = new JButton("Update");
-//        buttonUpdate.setBounds(380, verticalButtonShift, buttonWidth, buttonHeight);
-//        buttonUpdate.addActionListener(this::actionPerformed);
-//        add(buttonUpdate);
+        buttonUpdate = new JButton("Update");
+        buttonUpdate.setBounds(380, verticalButtonShift, buttonWidth, buttonHeight);
+        buttonUpdate.addActionListener(this::actionPerformed);
+        add(buttonUpdate);
 
 //        Button : Back
         buttonBack = new JButton("Back");
@@ -68,7 +66,7 @@ public class ViewEmployee extends JFrame implements ActionListener {
 
 
 //        Applying fonts & styles on all the buttons :
-        smallButtonArray = new JButton[] {buttonSearch, buttonPrint, buttonBack};
+        smallButtonArray = new JButton[] {buttonSearch, buttonPrint, buttonUpdate, buttonBack};
         applyFontStyleButtonSmall(smallButtonArray);
 
         try {
@@ -120,34 +118,34 @@ public class ViewEmployee extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource().equals(buttonSearch)){
-           try {
-               Conn connection = new Conn();
-               String query = "";
-               ResultSet resultSet=null;
-               if(choiceData.getSelectedItem().equals("None")){
-                   JOptionPane.showMessageDialog(
-                           this,
-                           "Select  EmployeeId First : ",
-                           "Try Again!",
-                           JOptionPane.INFORMATION_MESSAGE
-                   );
-               }else if(choiceData.getSelectedItem().equals("All")){
-                   query = "select * from employees";
-                   resultSet = connection.statement.executeQuery(query);
-                   table.setModel(DbUtils.resultSetToTableModel(resultSet));
+            try {
+                Conn connection = new Conn();
+                String query = "";
+                ResultSet resultSet=null;
+                if(choiceData.getSelectedItem().equals("None")){
+                    JOptionPane.showMessageDialog(
+                            this,
+                            "Select  EmployeeId First : ",
+                            "Try Again!",
+                            JOptionPane.INFORMATION_MESSAGE
+                    );
+                }else if(choiceData.getSelectedItem().equals("All")){
+                    query = "select * from employees";
+                    resultSet = connection.statement.executeQuery(query);
+                    table.setModel(DbUtils.resultSetToTableModel(resultSet));
 //                   table.setFont(new Font("serif", Font.PLAIN, 14));
-               }else{
-                   query = "select * from employees where employeeId = '"+choiceData.getSelectedItem()+"'";
-                   resultSet = connection.statement.executeQuery(query);
-                   table.setModel(DbUtils.resultSetToTableModel(resultSet));
+                }else{
+                    query = "select * from employees where employeeId = '"+choiceData.getSelectedItem()+"'";
+                    resultSet = connection.statement.executeQuery(query);
+                    table.setModel(DbUtils.resultSetToTableModel(resultSet));
 //                   table.setFont(new Font("serif", Font.PLAIN, 14));
-               }
-               table.setFont(new Font("serif", Font.PLAIN, 15));
+                }
+                table.setFont(new Font("serif", Font.PLAIN, 15));
 
 
-           }catch (Exception E){
-               E.printStackTrace();
-           }
+            }catch (Exception E){
+                E.printStackTrace();
+            }
         }else if(e.getSource().equals(buttonPrint)){
             try {
                 table.print();

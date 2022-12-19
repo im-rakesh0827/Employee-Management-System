@@ -71,7 +71,7 @@ public class AdminPanel extends JFrame implements ActionListener {
             new ViewEmployee();
         }if(e.getSource().equals(updateEmp)){
             setVisible(false);
-            new ViewEmployee();
+            new Update();
         }if(e.getSource().equals(deleteEmp)){
             setVisible(false);
             new RemoveEmployee();

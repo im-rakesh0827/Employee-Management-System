@@ -300,22 +300,30 @@ public class UpdateEmployee extends JFrame implements ActionListener {
             String confirmPassword = String.valueOf(pfConfirmPassword.getPassword());
             String [] dataArray = {fatherName, email, phone, address, education, designation, salary, password, confirmPassword};
             try {
-                boolean flag = true;
-                for(String data:dataArray){
-                    if(data.isEmpty()){
-                        flag = false;
-//                        break;
-                    }
-                    if(!flag){
-//                    frame = new JFrame();
-                        if(JOptionPane.showConfirmDialog(this, "Enter Details Carefully", "Details Missing !", JOptionPane.CLOSED_OPTION)==JOptionPane.CLOSED_OPTION){
-                            new UpdateEmployee(null);
-                        }
-                    }
-                    break;
+//                boolean flag = true;
+//                for(String data:dataArray){
+//                    if(data.isEmpty()){
+//                        flag = false;
+////                        break;
+//                    }
+//                    if(!flag){
+////                    frame = new JFrame();
+//                        if(JOptionPane.showConfirmDialog(this, "Enter Details Carefully", "Details Missing !", JOptionPane.CLOSED_OPTION)==JOptionPane.CLOSED_OPTION){
+//                            new UpdateEmployee(null);
+//                        }
+//                    }
+//                    break;
+//
+//                }
+                if(fatherName.isEmpty() || email.isEmpty() || phone.isEmpty() || address.isEmpty() || education.isEmpty() ||designation.isEmpty() || salary.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()){
+                    JOptionPane.showMessageDialog(
+                            this,
+                            "Enter Your Details Carefully...",
+                            "Details Missing ! ",
+                            JOptionPane.ERROR_MESSAGE
+                    );
 
-                }
-                if(!password.equals(confirmPassword)){
+                }else if(!password.equals(confirmPassword)){
                     JOptionPane.showMessageDialog(
                             this,
                             "Re-Enter Confirm Password...",
@@ -323,19 +331,21 @@ public class UpdateEmployee extends JFrame implements ActionListener {
                             JOptionPane.ERROR_MESSAGE
                     );
 
+                }else{
+                    if(confirmOptionYesNo()){
+                        Conn connection = new Conn();
+                        String query = "update employees set fatherName ='"+fatherName+"', email='"+email+"', phone='"+phone+"', address='"+address+"', education='"+education+"', designation='"+designation+"', salary='"+salary+"', password='"+password+"' where employeeId='"+employeeId+"'  ";
+                        connection.statement.executeUpdate(query);
+                        JOptionPane.showMessageDialog(
+                                this,
+                                "Details Updated Successfully",
+                                "Congratulation",
+                                JOptionPane.ERROR_MESSAGE
+                        );
+                        setVisible(false);
+                        new AdminPanel();
+                    }
                 }
-
-                Conn connection = new Conn();
-                String query = "update employees set fatherName ='"+fatherName+"', email='"+email+"', phone='"+phone+"', address='"+address+"', education='"+education+"', designation='"+designation+"', salary='"+salary+"', password='"+password+"' where employeeId='"+employeeId+"'  ";
-                connection.statement.executeUpdate(query);
-                JOptionPane.showMessageDialog(
-                        this,
-                        "Details Updated Successfully",
-                        "Congratulation",
-                        JOptionPane.ERROR_MESSAGE
-                );
-                setVisible(false);
-                new AdminPanel();
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }

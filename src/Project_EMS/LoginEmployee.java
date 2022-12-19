@@ -110,7 +110,7 @@ public class LoginEmployee extends JFrame implements ActionListener {
                 String email = tfEmail.getText();
                 String password  = String.valueOf(pfPassword.getPassword());
                 Conn c = new Conn();
-                String query = "select * from employees where email='"+email+"'and password = '"+pfPassword+"'";
+                String query = "select * from employees where email='"+email+"'and password = '"+password+"'";
                 ResultSet resultSet = c.statement.executeQuery(query);
                 if(resultSet.next()){
                     JOptionPane.showMessageDialog(
@@ -120,6 +120,7 @@ public class LoginEmployee extends JFrame implements ActionListener {
                             JOptionPane.ERROR_MESSAGE
                     );
                     setVisible(false);
+
                 }else{
                     JOptionPane.showMessageDialog(
                             this,
