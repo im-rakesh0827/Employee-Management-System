@@ -76,12 +76,6 @@ public class RemoveEmployee extends JFrame  implements ActionListener {
         add(labelPhoneFixed);
 
 
-
-
-
-
-
-
         try {
             Conn connection = new Conn();
             String query = "select * from employees where employeeId='"+choiceEmpId.getSelectedItem()+"' ";

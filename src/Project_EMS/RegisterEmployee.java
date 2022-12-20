@@ -134,13 +134,12 @@ public class RegisterEmployee extends JFrame implements ActionListener {
 
 
 //        Education :
-        String courses[] = {" ", "B.Tech", "BE", "BCA", "B.Sc","B.Com", "BA", "BBA", "MBA", "MCA", "M.Tech", "M.Sc", "PHD", "Other"};
         verticalShift+=40;
         labelEducation = new JLabel("Highest Education : ");
         labelEducation.setBounds(40, verticalShift, 160, 30);
         labelEducation.setFont(new Font("serif", Font.BOLD, 18));
         add(labelEducation);
-
+        String courses[] = {" ", "B.Tech", "BE", "BCA", "B.Sc","B.Com", "BA", "BBA", "MBA", "MCA", "M.Tech", "M.Sc", "PHD", "Other"};
         boxEducation = new JComboBox(courses);
         boxEducation.setBounds(horizontalShift, verticalShift, textFieldArea, 30);
         boxEducation.setFont(new Font("serif", Font.PLAIN, 18));
@@ -382,11 +381,11 @@ public class RegisterEmployee extends JFrame implements ActionListener {
     public Employee employee;
 
     private Employee addUserToDatabase(String name,String fatherName, String email, String dob, String aadhar, String phone, String address, String education, String employeeId, String designation, String salary, String password) throws SQLException {
-        final String DB_URL = "jdbc:mysql://localhost:3306/userdb";
+        final String DBURL = "jdbc:mysql://localhost:3306/userdb";
         final String USERNAME = "root";
         final String PASSWORD = "Apple@0827";
         try {
-            connection = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
+            connection = DriverManager.getConnection(DBURL, USERNAME, PASSWORD);
             statement = connection.createStatement();
             query = "insert into employees(name, fatherName, email, dob, aadhar, phone, address, education, employeeId, designation, salary, password)"+"values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             preparedStatement = connection.prepareStatement(query);
@@ -423,6 +422,9 @@ public class RegisterEmployee extends JFrame implements ActionListener {
         }
         return employee;
     }
+
+
+
     public static void main(String[] args) {
         new RegisterEmployee();
         new Employee();
