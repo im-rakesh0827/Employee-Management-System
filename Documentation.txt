@@ -1,0 +1,10 @@
+This project is build using Java, Java Swing, JDBC, JDBC driver and MySQL.
+Initially when the user visit, they are prompt to a welcome window and the welcome window contains two button one is Employee and another one is Admin,
+When the user tap to Employee button, he is prompt to a employee login panel, which contains three button (Login, Register, Back),
+If the employee is already registered then he can simplye enter the login credential and can log in.
+If the user want to go back he can press Back button.
+And the if the user is new, then he can press Register button,
+If the registere button is pressed an Employee register panel will open and after filling all the details employee can submit the details and all the details get stored in the MySQL, database
+in the form of tables.
+After successful registration user will prompt login panel again where they can check and see the details whaever they has filled,
+ 

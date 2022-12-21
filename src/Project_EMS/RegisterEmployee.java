@@ -435,8 +435,8 @@ public class RegisterEmployee extends JFrame implements ActionListener {
 
 
     public static void main(String[] args) {
-        new RegisterEmployee();
-        new Employee();
+//        new RegisterEmployee();
+//        new Employee();
     }
 
 }

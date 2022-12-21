@@ -82,9 +82,6 @@ public class LoginEmployee extends JFrame implements ActionListener {
         applyFontStyleButtonBig(buttonArray);
 
 
-
-
-
         ImageIcon image1 = new ImageIcon(ClassLoader.getSystemResource("icons/second.jpg"));
         Image image2 = image1.getImage().getScaledInstance(230, 230, Image.SCALE_DEFAULT);
         ImageIcon image3 = new ImageIcon(image2);
@@ -103,37 +100,40 @@ public class LoginEmployee extends JFrame implements ActionListener {
 
     }
 
+    public void authenticateEmployee(){
+        try {
+            String email = (tfEmail.getText()).toLowerCase();
+            String password = String.valueOf(pfPassword.getPassword());
+            Conn connection = new Conn();
+            String query = "select * from employees where email='"+email+"'and password = '"+password+"'";
+            ResultSet resultSet = connection.statement.executeQuery(query);
+            if(resultSet.next()){
+                JOptionPane.showMessageDialog(
+                        this,
+                        "You Have Logged In Successfully",
+                        "Login Successful",
+                        JOptionPane.ERROR_MESSAGE
+                );
+                setVisible(false);
+                new Home();
+            }else{
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Invalid Login Credential",
+                        "Try Again !",
+                        JOptionPane.ERROR_MESSAGE
+                );
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource().equals(buttonLogin)){
-            try {
-                String email = tfEmail.getText();
-                String password  = String.valueOf(pfPassword.getPassword());
-                Conn c = new Conn();
-                String query = "select * from employees where email='"+email+"'and password = '"+password+"'";
-                ResultSet resultSet = c.statement.executeQuery(query);
-                if(resultSet.next()){
-                    JOptionPane.showMessageDialog(
-                            this,
-                            "Login Successful.",
-                            "Login Window",
-                            JOptionPane.ERROR_MESSAGE
-                    );
-                    setVisible(false);
-                    new ProfileEmployee();
-
-                }else{
-                    JOptionPane.showMessageDialog(
-                            this,
-                            "Invalid Email or Password !",
-                            "Try Again",
-                            JOptionPane.ERROR_MESSAGE
-                    );
-                }
-
-            }catch (Exception E){
-                E.printStackTrace();
-            }
+            authenticateEmployee();
         }else if(e.getSource().equals(buttonRegister)){
             setVisible(false);
             new RegisterEmployee();
