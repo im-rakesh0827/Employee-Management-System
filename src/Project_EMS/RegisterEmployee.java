@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.Random;
 
 import static Project_EMS.ApplyFontStyle.applyFontStyleButtonBig;
@@ -27,6 +28,7 @@ public class RegisterEmployee extends JFrame implements ActionListener {
     JTextField [] textFieldArray;
     Random random = new Random();
     int empNumber = random.nextInt(999999);
+    LocalDateTime dateTime = LocalDateTime.now();
 
     RegisterEmployee(){
         setLayout(null);
@@ -262,12 +264,10 @@ public class RegisterEmployee extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource().equals(buttonSubmit)){
-            if(confirmOptionYesNo()){
-                try {
-                    registerEmployee();
-                } catch (SQLException ex) {
-                    throw new RuntimeException(ex);
-                }
+            try {
+                registerEmployee();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
             }
 
         }else if(e.getSource().equals(buttonBack)){
@@ -313,6 +313,9 @@ public class RegisterEmployee extends JFrame implements ActionListener {
 //    }
 
 
+
+
+
     public void registerEmployee() throws SQLException {
         String name = tfName.getText();
         String fatherName = tfFatherName.getText();
@@ -329,22 +332,15 @@ public class RegisterEmployee extends JFrame implements ActionListener {
         String confirmPassword = String.valueOf(pfConfirmPassword.getPassword());
 
 //        String [] dataArray = {name, fatherName, email, dob, aadhar, phone, address, education, employeeId, designation, salary, password};
-//        boolean flag = true;
-//        for(String data:dataArray){
-//            if(data.isEmpty()){
-//                flag = false;
-//                break;
-//            }
-//        }
-//        if(!flag){
-//            frame = new JFrame();
-//            if(JOptionPane.showConfirmDialog(frame, "Enter Details Carefully", "Details Missing !", JOptionPane.CLOSED_OPTION)==JOptionPane.CLOSED_OPTION){
-//                new Registration();
-//            }
+//        if(checkEmpty(dataArray)){
+//            JOptionPane.showMessageDialog(
+//                    this,
+//                    "Enter Details Carefully",
+//                    "Details Missing !",
+//                    JOptionPane.ERROR_MESSAGE
+//            );
 //        }
 
-
-        employee = addUserToDatabase(name, fatherName, email, dob, aadhar, phone, address, education, employeeId, designation, salary, password);
         if(name.isEmpty() || fatherName.isEmpty() || email.isEmpty() || dob.isEmpty() || aadhar.isEmpty() || phone.isEmpty() || address.isEmpty() || education.isEmpty() || employeeId.isEmpty() || designation.isEmpty() || salary.isEmpty() || password.isEmpty()){
                 JOptionPane.showMessageDialog(
                         this,
@@ -352,27 +348,39 @@ public class RegisterEmployee extends JFrame implements ActionListener {
                         "Details Missing !",
                         JOptionPane.ERROR_MESSAGE
                 );
-        }
-        if(!password.equals(confirmPassword)){
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Re-Enter Confirm Password...",
-                    "Password Mismatch ! ",
-                    JOptionPane.ERROR_MESSAGE
-            );
-        } else if(employee !=null){
-            System.out.println("Successfully Registered : ");
-            setVisible(false);
-            new Home();
         }else{
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Failed to register new user : ",
-                    "Try Again !",
-                    JOptionPane.ERROR_MESSAGE
-            );
-//            setVisible(false);
+            if(!password.equals(confirmPassword)){
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Re-Enter Confirm Password...",
+                        "Password Mismatch ! ",
+                        JOptionPane.ERROR_MESSAGE
+                );
+            } else{
+                employee = addUserToDatabase(name, fatherName, email, dob, aadhar, phone, address, education, employeeId, designation, salary, password);
+                if(employee!=null){
+                    if(confirmOptionYesNo()){
+                       JOptionPane.showMessageDialog(
+                               this,
+                               "Employee Registered Successfully ",
+                               "Registration Successful",
+                               JOptionPane.ERROR_MESSAGE
+                       );
+                        setVisible(false);
+                        new Home();
+                    }
+                }
+
+
+            }
         }
+    }
+
+    private boolean checkEmpty(String[] dataArray) {
+        for(String data:dataArray){
+            if(data.isEmpty()) return false;
+        }
+        return true;
     }
 
     Connection connection;
