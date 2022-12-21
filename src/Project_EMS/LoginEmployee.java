@@ -120,6 +120,7 @@ public class LoginEmployee extends JFrame implements ActionListener {
                             JOptionPane.ERROR_MESSAGE
                     );
                     setVisible(false);
+                    new ProfileEmployee();
 
                 }else{
                     JOptionPane.showMessageDialog(

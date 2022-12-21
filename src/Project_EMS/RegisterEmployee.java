@@ -363,7 +363,7 @@ public class RegisterEmployee extends JFrame implements ActionListener {
         } else if(employee !=null){
             System.out.println("Successfully Registered : ");
             setVisible(false);
-//            new Home();
+            new Home();
         }else{
             JOptionPane.showMessageDialog(
                     this,
@@ -374,6 +374,7 @@ public class RegisterEmployee extends JFrame implements ActionListener {
 //            setVisible(false);
         }
     }
+
     Connection connection;
     Statement statement;
     String query;

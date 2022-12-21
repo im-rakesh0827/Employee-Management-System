@@ -5,6 +5,7 @@ public class ProfileEmployee {
 
     }
     public static void main(String[] args) {
+        new ProfileEmployee();
 
     }
 }
