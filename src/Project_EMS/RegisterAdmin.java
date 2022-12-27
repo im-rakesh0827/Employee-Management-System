@@ -21,6 +21,10 @@ public class RegisterAdmin extends JFrame implements ActionListener {
 
 
 
+        JLabel labelName = new JLabel("Name : ");
+
+
+
 
 
 
