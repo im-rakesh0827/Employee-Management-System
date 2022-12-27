@@ -137,11 +137,8 @@ public class LoginAdmin extends JFrame implements ActionListener {
                 E.printStackTrace();
             }
         }else if(e.getSource().equals(buttonRegister)){
-            if(confirmOptionYesNo()){
-                setVisible(false);
-                new UpdateEmployee(null);
-            }
-
+            setVisible(false);
+            new RegisterAdmin();
         }else if(e.getSource().equals(buttonBack)){
             if(confirmOptionYesNo()){
                 setVisible(false);

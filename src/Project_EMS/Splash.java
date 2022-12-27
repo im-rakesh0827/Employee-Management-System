@@ -92,7 +92,7 @@ public class Splash extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()== buttonClickHere){
             setVisible(false);
-            new LoginEmployee();
+            new Home();
         }
 
     }
