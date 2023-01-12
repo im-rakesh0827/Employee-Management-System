@@ -1,10 +1,14 @@
 <h1 align="center">Welcome to Employee Management System </h1>
+<div>
 <img align="left" alt="coding" width="2000"
     src="https://i.pinimg.com/originals/2e/9c/68/2e9c6878eae5bbcdaa2d07ed4dbd79b8.gif">
     &nbsp;
+</div>
+<div>
 <a href="https://app.daily.dev/im_rakesh0827"><img
         src="https://api.daily.dev/devcards/af8267d7f3354450901bc26ab429a635.png?r=k54" width="400" align="right"
         alt="Rakesh Kumar's Dev Card" /></a>
+</div>
 <h3>Description : </h3>
 This project is based on employee management system, basically it can helps an organisation or institution to manage
 their employee.
