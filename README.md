@@ -2,9 +2,7 @@
 <div>
     <img align="left" alt="coding" width="2000"
     src="https://i.pinimg.com/originals/2e/9c/68/2e9c6878eae5bbcdaa2d07ed4dbd79b8.gif">
-<p align="left"> <img
-        src="https://komarev.com/ghpvc/?username=im-rakesh0827&label=Profile%20views&color=0e75b6&style=flat"
-        alt="im-rakesh0827" /> </p>
+    &nbsp;
 </div>
 <div>
     <a href="https://app.daily.dev/im_rakesh0827"><img
