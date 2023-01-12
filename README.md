@@ -69,9 +69,3 @@ What things you need to install the software and how to install them:
         </tr>
     </tbody>
 </table>
-
-[# Our valuable Contributors👩‍💻👨‍💻 :
-<a href="https://github.com/im-rakesh0827/E-Voting-System/pulse">
-    <img src="https://contributors-img.web.app/image?repo=E-Voting-System.git" />
-</a>]: #
-### Best of luck for your development career👍😊
