@@ -14,8 +14,6 @@ public class ApplyFontStyle extends JFrame{
 //        button.setFont(new Font("serif", Font.BOLD, 20));
 //    }
 
-
-
 //    Applying Font & Styles on array of labels & fields :
     public static void applyFontStyleLabelField(JLabel [] labelArray, JTextField [] fieldArray){
         for(JLabel label:labelArray){
